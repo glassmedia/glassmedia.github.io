@@ -257,6 +257,25 @@
   .callout p{font-size:.9375rem;color:var(--ink-2);max-width:70ch;line-height:1.6}
   .mono-inline{font-family:var(--mono);font-size:.8125rem;background:var(--paper);border:1px solid var(--rule-soft);border-radius:2px;padding:1px 5px;color:var(--ink)}
 
+  .impact{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--s4);margin-bottom:var(--s4)}
+  .impact-card{flex:1 1 200px;background:var(--raised);border:1px solid var(--rule);border-radius:3px;padding:var(--s4) var(--s6)}
+  .impact-card.money{background:var(--madder-tint);border-color:oklch(0.90 0.030 30)}
+  .impact-k{display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .impact-v{display:block;font-family:var(--mono);font-size:1.875rem;line-height:1.2;margin-top:var(--s1);font-variant-numeric:tabular-nums;color:var(--ink)}
+  .impact-v.alto{color:var(--madder)}
+  .impact-u{font-size:.9375rem;color:var(--ink-3);margin-left:2px}
+  .impact-n{display:block;font-size:.8125rem;color:var(--ink-3);margin-top:var(--s1)}
+  .impact-arrow{display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-size:1.375rem;flex:0 0 auto;padding:0 var(--s1)}
+  @media(max-width:680px){.impact-arrow{display:none}}
+
+  .hyp-list{margin:var(--s4) 0 var(--s6)}
+  .hyp{display:flex;gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--rule-soft)}
+  .hyp:last-child{border-bottom:0;padding-bottom:0}
+  .hyp-rank{flex:none;width:26px;height:26px;border-radius:50%;background:var(--sunken);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.75rem;color:var(--ink-2)}
+  .hyp-top{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-bottom:var(--s1)}
+  .hyp-top h4{font-size:1rem;font-weight:500;color:var(--ink);margin:0}
+  .hyp p{color:var(--ink-2);font-size:.9375rem;line-height:1.6;max-width:68ch}
+
   ol.docs{margin:0;padding-left:1.4em;color:var(--ink-2);font-size:.9375rem;line-height:1.6}
   ol.docs li{padding:var(--s1) 0}
   ol.docs li b{color:var(--ink);font-weight:500}
@@ -566,6 +585,27 @@
 <div role="tabpanel" id="p-agua" aria-labelledby="t-agua" hidden>
 
   <div class="block">
+    <div class="impact">
+      <div class="impact-card">
+        <span class="impact-k">Consumo controlado</span>
+        <span class="impact-v">231<span class="impact-u"> m³/mês</span></span>
+        <span class="impact-n">média fev/25 – jan/26</span>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-card">
+        <span class="impact-k">Consumo elevado</span>
+        <span class="impact-v alto">277<span class="impact-u"> m³/mês</span></span>
+        <span class="impact-n">abr–jun/26 · +19,8% · pico de 298 m³ em mai</span>
+      </div>
+      <div class="impact-card money">
+        <span class="impact-k">Diferença, se persistir</span>
+        <span class="impact-v alto">R$ 8.996<span class="impact-u">/ano</span></span>
+        <span class="impact-n">R$ 750 a mais por mês, desde abr/26</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
     <div class="block-head"><span class="index">Metros cúbicos · faturas Sanepar</span><h2>Consumo, não tarifa</h2></div>
     <p class="lede">Os livros não trazem o consumo em nenhum relatório, mas as próprias faturas da Sanepar
     estão anexadas como imagem nos comprovantes de despesa e trazem o quadro "Histórico de consumo/m³".
@@ -617,7 +657,7 @@
           <text x="507.2" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jan/26</text>
           <text x="615.5" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Abr/26</text>
           <text x="687.7" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jun/26</text>
-          <text x="56" y="252" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Sans, sans-serif">Metros cúbicos por mês de competência · hidrômetro geral</text>
+          <text x="56" y="252" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Sans, sans-serif">Metros cúbicos por mês de competência · hidrômetro hidrômetro geral</text>
         </svg>
       </div>
       <div class="legend">
@@ -628,13 +668,6 @@
       <figcaption>Jan/2025 (147 m³) corresponde a um período de leitura curto e foi excluído da média de
       referência. Leituras acumuladas conferem: 4.316 m³ em 17/12/2025 e 5.827 m³ em 17/06/2026.</figcaption>
     </figure>
-
-    <div class="rail" style="margin-top:var(--s8)">
-      <div><span class="rail-k">Consumo de referência</span><span class="rail-v">231 m³<span class="rail-u">/mês</span></span><span class="rail-n">fev/25 a jan/26</span></div>
-      <div><span class="rail-k">Consumo abr a jun/26</span><span class="rail-v">277 m³<span class="rail-u">/mês</span></span><span class="rail-n">média dos três meses</span></div>
-      <div><span class="rail-k">Aumento</span><span class="rail-v alto">+46 m³<span class="rail-u">/mês</span></span><span class="rail-n">+19,8% · 2,2 m³ por unidade</span></div>
-      <div><span class="rail-k">Pico mai/2026</span><span class="rail-v alto">+67 m³</span><span class="rail-n">298 m³ · +29% sobre a média</span></div>
-    </div>
 
     <p class="lede">A tarifa da Sanepar ficou <b>praticamente parada</b> no período. A tarifa mínima
     residencial de água foi R$ 1.182,28 na fatura de dez/2025, R$ 1.184,26 na de mai/2026 — 0,17% em cinco
@@ -741,13 +774,6 @@
       </div>
     </figure>
 
-    <div class="rail" style="margin-top:var(--s8)">
-      <div><span class="rail-k">Média de referência</span><span class="rail-v">2.654</span><span class="rail-n">fev/25 a jan/26</span></div>
-      <div><span class="rail-k">Média abr a jul/26</span><span class="rail-v">3.404</span><span class="rail-n">+28,2%</span></div>
-      <div><span class="rail-k">Excedente por mês</span><span class="rail-v">750</span><span class="rail-n">R$ 35,70 por unidade</span></div>
-      <div><span class="rail-k">Se persistir 12 meses</span><span class="rail-v">8.996</span><span class="rail-n">custo anual do desvio</span></div>
-    </div>
-
     <p class="lede">O rateio cobrado dos condôminos acompanha a despesa com um mês de atraso, de modo que o
     prejuízo não fica no caixa por muito tempo — mas fica. Em dezoito meses, o rateio arrecadou
     R$ 48.354,27 contra R$ 50.631,17 pagos à Sanepar: <b>R$ 2.276,90 de sub-recuperação estrutural</b>,
@@ -761,7 +787,8 @@
       resta consumo: ou vazamento, ou mudança de uso. A subida progressiva de 201 para 298 m³ em quatro
       meses, com leve recuo depois, é a assinatura de vazamento em ramal enterrado ou de boia de caixa
       d'água com folga, não de mais moradores, que produziria degrau e não rampa.</li>
-      <li><b>Leitura do hidrômetro geral confrontada com a soma dos individuais.</b> O hidrômetro geral marcava 5.827 m³ em 17/06/2026. Se a diferença contra a soma dos medidores das
+      <li><b>Leitura do hidrômetro geral confrontada com a soma dos individuais.</b> O hidrômetro geral é o
+      hidrômetro geral e marcava 5.827 m³ em 17/06/2026. Se a diferença contra a soma dos medidores das
       unidades cresceu junto com a conta, a perda está na área comum; se não cresceu, o consumo mudou
       dentro das unidades e a discussão é de rateio, não de manutenção.</li>
       <li><b>Verificar o registro "TAMPÃO".</b> As faturas de janeiro a maio trazem esse complemento no
@@ -775,7 +802,50 @@
 <div role="tabpanel" id="p-energia" aria-labelledby="t-energia" hidden>
 
   <div class="block">
-    <div class="block-head"><span class="index">Faturas Copel · duas unidades consumidoras</span><h2>Duas contas, dois problemas opostos</h2></div>
+    <div class="impact" style="margin-bottom:var(--s3)">
+      <div class="impact-card">
+        <span class="impact-k">Área comum · com compensação</span>
+        <span class="impact-v">R$ 0,746<span class="impact-u">/kWh</span></span>
+        <span class="impact-n">média 2025</span>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-card">
+        <span class="impact-k">Área comum · sem compensação</span>
+        <span class="impact-v alto">R$ 0,926<span class="impact-u">/kWh</span></span>
+        <span class="impact-n">média 2026 · +24,1% · consumo estável</span>
+      </div>
+      <div class="impact-card money">
+        <span class="impact-k">Diferença</span>
+        <span class="impact-v alto">R$ 2.400<span class="impact-u">/ano</span></span>
+        <span class="impact-n">R$ 201/mês de compensação não creditada</span>
+      </div>
+    </div>
+    <div class="impact">
+      <div class="impact-card">
+        <span class="impact-k">Zeladoria · patamar estável</span>
+        <span class="impact-v">63<span class="impact-u"> kWh/mês</span></span>
+        <span class="impact-n">jul–dez/25</span>
+      </div>
+      <div class="impact-arrow">→</div>
+      <div class="impact-card">
+        <span class="impact-k">Zeladoria · junho/26</span>
+        <span class="impact-v alto">207<span class="impact-u"> kWh/mês</span></span>
+        <span class="impact-n">+229% sobre o patamar</span>
+      </div>
+      <div class="impact-card money">
+        <span class="impact-k">Se persistir</span>
+        <span class="impact-v alto">R$ 1.690<span class="impact-u">/ano</span></span>
+        <span class="impact-n">a R$ 0,98 por kWh</span>
+      </div>
+    </div>
+    <div class="total" style="margin-top:var(--s4)">
+      <span>Impacto combinado das duas unidades consumidoras, se os dois desvios persistirem.</span>
+      <strong>≈ R$ 4.090 /ano</strong>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Faturas Copel · área comum e zeladoria</span><h2>Duas contas, dois problemas opostos</h2></div>
     <p class="lede">O condomínio tem duas unidades consumidoras na Copel: a área comum e o relógio da
     zeladoria. Extraí o consumo em kWh das faturas anexadas aos comprovantes, e os dois medidores contam
     histórias contrárias. Na área comum o consumo praticamente não mudou e o preço por kWh disparou; na
@@ -791,7 +861,7 @@
   </div>
 
   <div class="block">
-    <div class="block-head"><span class="index">Área comum · unidade consumidora principal</span><h2>O consumo não mudou. O preço, sim.</h2></div>
+    <div class="block-head"><span class="index">Área comum · unidade consumidora Copel</span><h2>O consumo não mudou. O preço, sim.</h2></div>
 
     <div class="rail">
       <div><span class="rail-k">Consumo médio 2025</span><span class="rail-v">659 kWh<span class="rail-u">/mês</span></span><span class="rail-n">12 meses</span></div>
@@ -881,7 +951,7 @@
   </div>
 
   <div class="block">
-    <div class="block-head"><span class="index">Zeladoria · unidade consumidora secundária</span><h2>Aqui é consumo, e triplicou</h2></div>
+    <div class="block-head"><span class="index">Zeladoria · unidade consumidora Copel</span><h2>Aqui é consumo, e triplicou</h2></div>
     <p class="lede">O relógio da zeladoria consumia entre 61 e 67 kWh por mês de forma estável desde meados
     de 2025. Em março começou a subir e não parou. O preço por kWh é o mesmo nas duas pontas — R$ 0,99 em
     dezembro e R$ 0,98 em junho — de modo que aqui não há dúvida de causa.</p>
@@ -894,17 +964,50 @@
       <div class="comp-row"><span class="lab">Jun/2026 <span class="quiet">leitura 12.890 → 13.097</span></span><span class="track"><span class="fill agua" style="width:100%"></span></span><span class="v">207 kWh</span></div>
     </div>
 
-    <div class="rail" style="margin-top:var(--s6)">
-      <div><span class="rail-k">Patamar estável</span><span class="rail-v">63 kWh<span class="rail-u">/mês</span></span><span class="rail-n">jul a dez/2025</span></div>
-      <div><span class="rail-k">Junho de 2026</span><span class="rail-v alto">207 kWh<span class="rail-u">/mês</span></span><span class="rail-n">R$ 203,66</span></div>
-      <div><span class="rail-k">Aumento</span><span class="rail-v alto">+144 kWh<span class="rail-u">/mês</span></span><span class="rail-n">+229%</span></div>
-      <div><span class="rail-k">Se persistir</span><span class="rail-v">R$ 1.690<span class="rail-u">/ano</span></span><span class="rail-n">a R$ 0,98 por kWh</span></div>
+    <div class="hyp-list">
+      <div class="hyp">
+        <span class="hyp-rank">1</span>
+        <div>
+          <div class="hyp-top"><h4>Ferramentas elétricas da obra do telhado</h4><span class="sev aten"><i class="dot"></i>Mais provável</span></div>
+          <p>A Perfect Telhados executou serviços de março a julho de 2026 (achado A-07), e a janela coincide
+          quase exatamente com a subida: estável até março, +10 kWh em abril, disparo em maio e novo salto em
+          junho, meses de maior atividade (retirada de forro, ripas e madeiramento). Furadeira, esmerilhadeira
+          e compressor ligados no quadro da zeladoria explicam um degrau súbito sem exigir nenhum equipamento
+          fixo novo.</p>
+        </div>
+      </div>
+      <div class="hyp">
+        <span class="hyp-rank">2</span>
+        <div>
+          <div class="hyp-top"><h4>Equipamento novo permanente — a lavadora de alta pressão</h4><span class="sev info"><i class="dot"></i>Possível</span></div>
+          <p>O condomínio comprou uma lavadora de alta pressão em abril de 2026 (R$ 1.411,90, rubrica
+          2.1.9.86). Se ela opera a partir da tomada da zeladoria e passou a ser usada com regularidade na
+          limpeza das áreas comuns, sustenta um patamar mais alto — mas sozinha não explica por que junho
+          (207 kWh) dobrou sobre maio (102 kWh).</p>
+        </div>
+      </div>
+      <div class="hyp">
+        <span class="hyp-rank">3</span>
+        <div>
+          <div class="hyp-top"><h4>Chuveiro elétrico ou aquecedor</h4><span class="sev"><i class="dot"></i>Pouco provável</span></div>
+          <p>É a causa clássica de disparo em ponto de consumo pequeno, mas exigiria uma mudança de rotina da
+          zeladora sem contrapartida registrada em nenhum outro lançamento, e não explica a coincidência com
+          o cronograma da obra do telhado.</p>
+        </div>
+      </div>
+      <div class="hyp">
+        <span class="hyp-rank">4</span>
+        <div>
+          <div class="hyp-top"><h4>Ligação indevida a partir do quadro</h4><span class="sev"><i class="dot"></i>Só se descarta por inspeção</span></div>
+          <p>Sempre possível em um quadro compartilhado, mas é a única hipótese sem nenhum respaldo em outro
+          registro do condomínio. Só se confirma, ou se descarta, com medidor alicate por circuito.</p>
+        </div>
+      </div>
     </div>
 
-    <p class="lede">Um ponto de consumo pequeno que quadruplica em quatro meses costuma ser uma de três
-    coisas: aquecedor ou chuveiro ligado em circuito da zeladoria, bomba operando fora de ciclo, ou ligação
-    indevida a partir daquele quadro. Nenhuma delas se resolve pela conta; todas se resolvem com uma
-    inspeção do quadro e um medidor alicate por circuito.</p>
+    <p class="lede">Nenhuma dessas hipóteses se resolve pela conta de luz. Todas se resolvem com uma
+    inspeção do quadro da zeladoria e um medidor alicate por circuito, de preferência comparando um dia de
+    uso normal com um dia de obra no telhado.</p>
   </div>
 
   <div class="block">
@@ -1051,9 +1154,9 @@
     <article class="find">
       <div class="find-top"><span class="sev info"><i class="dot"></i>Governança</span><span class="id">A-08</span><span class="rubrica">2.1.1.8</span></div>
       <h3>Cobertura de férias contratada com pessoa de mesmo sobrenome da funcionária afastada</h3>
-      <p>O pagamento de R$ 2.880,00 em 03/07 pela cobertura das férias foi feito a uma prestadora de
-      serviços cujo sobrenome coincide com o da zeladora efetiva. A coincidência não é irregularidade,
-      mas exige registro formal.</p>
+      <p>O pagamento de R$ 2.880,00 em 03/07 pela cobertura das férias foi feito a uma prestadora com o mesmo
+      sobrenome da zeladora efetiva do condomínio. A coincidência não é
+      irregularidade, mas exige registro formal.</p>
       <div class="acao"><b>Verificar:</b> contrato ou recibo de prestação de serviço e ciência do conselho.</div>
     </article>
 
@@ -1145,6 +1248,29 @@
       normalização de água e energia.</span>
       <strong>≈ R$ 18.500</strong>
     </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Contraponto · rubricas 2.1.9.18, 2.1.9.19, 2.1.9.55</span><h2>Elevador e portão: contratos sob controle</h2></div>
+    <p class="lede">Nem toda manutenção se comporta como água e energia. Isolei os dois contratos com maior
+    potencial de sobressalto — elevador e portão eletrônico — e os sete meses mostram o oposto de um desvio:
+    valor fixo, sem reajuste, sem lançamento inexplicado.</p>
+
+    <div class="rail">
+      <div><span class="rail-k">Elevador · serviço mensal</span><span class="rail-v bom">R$ 390,42<span class="rail-u">/mês</span></span><span class="rail-n">ELEVARE · idêntico em jan–jul</span></div>
+      <div><span class="rail-k">Elevador · peças</span><span class="rail-v">R$ 990</span><span class="rail-n">7 meses · 3 compras pontuais, valor baixo</span></div>
+      <div><span class="rail-k">Portão · contrato mensal</span><span class="rail-v bom">R$ 300,00<span class="rail-u">/mês</span></span><span class="rail-n">idêntico em jan–jul, sem reajuste</span></div>
+      <div><span class="rail-k">Portão · reparo em maio</span><span class="rail-v">R$ 1.240,80</span><span class="rail-n">"conserto motor devido a batida" · evento único</span></div>
+    </div>
+
+    <p class="lede">O único lançamento fora do padrão nas duas rubricas é justamente o mais rastreável: em
+    14/05/2026 o portão recebeu um conserto de motor com a nota fiscal explicitando o motivo, colisão
+    (R$ 1.240,80). O valor não se repete em nenhum outro mês, o que confirma acidente, não desvio recorrente.
+    Fica só uma observação cadastral: o prestador do contrato mensal mudou de ACT Serviços e Comércio Eireli
+    para Adri Tavares Bronzeamento Natural Ltda a partir desse mesmo reparo — razão social de salão de
+    bronzeamento prestando serviço de portão eletrônico. Não é necessariamente irregular (é comum
+    microempresa migrar CNPJ ou operar sob razão social antiga), mas vale confirmar o contrato com o novo
+    prestador.</p>
   </div>
 </div>
 
