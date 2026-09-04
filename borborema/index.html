@@ -256,6 +256,16 @@
   .callout h3{font-size:1.0625rem;margin-bottom:var(--s1)}
   .callout p{font-size:.9375rem;color:var(--ink-2);max-width:70ch;line-height:1.6}
   .mono-inline{font-family:var(--mono);font-size:.8125rem;background:var(--paper);border:1px solid var(--rule-soft);border-radius:2px;padding:1px 5px;color:var(--ink)}
+  .hint{position:relative;display:inline-block;border-bottom:1px dotted var(--ink-3);cursor:help}
+  .hint::after{
+    content:attr(data-tip);position:absolute;left:50%;top:100%;transform:translate(-50%,6px);
+    width:max-content;max-width:240px;white-space:normal;text-align:left;
+    background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:.75rem;line-height:1.45;
+    font-variant-numeric:normal;letter-spacing:normal;font-weight:400;
+    padding:var(--s2) var(--s3);border-radius:3px;box-shadow:0 4px 12px oklch(0 0 0 / 0.18);
+    opacity:0;visibility:hidden;transition:opacity .12s ease-out;pointer-events:none;z-index:20
+  }
+  .hint:hover::after,.hint:focus::after,.hint:focus-visible::after{opacity:1;visibility:visible}
 
   .impact{display:flex;flex-wrap:wrap;align-items:stretch;gap:var(--s4);margin-bottom:var(--s4)}
   .impact-card{flex:1 1 200px;background:var(--raised);border:1px solid var(--rule);border-radius:3px;padding:var(--s4) var(--s6)}
@@ -336,7 +346,8 @@
   <button role="tab" id="t-agua" aria-controls="p-agua" aria-selected="false">Água</button>
   <button role="tab" id="t-energia" aria-controls="p-energia" aria-selected="false">Energia</button>
   <button role="tab" id="t-sem-antena" aria-controls="p-sem-antena" aria-selected="false">Sem antena</button>
-  <button role="tab" id="t-achados" aria-controls="p-achados" aria-selected="false">Achados<span class="badge">9</span></button>
+  <button role="tab" id="t-2024" aria-controls="p-2024" aria-selected="false">2024 × 2026</button>
+  <button role="tab" id="t-achados" aria-controls="p-achados" aria-selected="false">Achados<span class="badge">10</span></button>
   <button role="tab" id="t-economia" aria-controls="p-economia" aria-selected="false">Economia</button>
 </div>
 
@@ -845,7 +856,7 @@
   </div>
 
   <div class="block">
-    <div class="block-head"><span class="index">Faturas Copel · área comum e zeladoria</span><h2>Duas contas, dois problemas opostos</h2></div>
+    <div class="block-head"><span class="index">Faturas Copel · UC da área comum e da zeladoria</span><h2>Duas contas, dois problemas opostos</h2></div>
     <p class="lede">O condomínio tem duas unidades consumidoras na Copel: a área comum e o relógio da
     zeladoria. Extraí o consumo em kWh das faturas anexadas aos comprovantes, e os dois medidores contam
     histórias contrárias. Na área comum o consumo praticamente não mudou e o preço por kWh disparou; na
@@ -1061,6 +1072,114 @@
   </div>
 </div>
 
+<!-- ============ 2024 × 2026 ============ -->
+<div role="tabpanel" id="p-2024" aria-labelledby="t-2024" hidden>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Jan–jul/2024 contra jan–jul/2026 · somatório dos sete meses, mesmo plano de contas</span><h2>Duas gestões, dois totais</h2></div>
+    <p class="lede">A comparação é por soma do período, não por média mensal — um valor pontual de um mês
+    isolado não mede consistência. A F&amp;N manteve o mesmo plano de contas nos dois anos, o que permite
+    somar rubrica a rubrica sem reclassificar nada. Separei também despesa ordinária (recorrente) de
+    extraordinária (obra financiada por Fundo de Obras ou Reserva), porque misturar as duas mascara a
+    comparação: uma reforma de telhado não é o mesmo tipo de gasto que a conta de luz.</p>
+
+    <div class="rail">
+      <div><span class="rail-k">Ordinárias comparáveis 2024</span><span class="rail-v">R$ 105.238<span class="rail-u">/7 meses</span></span><span class="rail-n">R$ 15.034/mês</span></div>
+      <div><span class="rail-k">Ordinárias comparáveis 2026</span><span class="rail-v alto">R$ 114.342<span class="rail-u">/7 meses</span></span><span class="rail-n">R$ 16.335/mês</span></div>
+      <div><span class="rail-k">Variação real</span><span class="rail-v alto">+8,7%</span><span class="rail-n">excluindo os 3 lançamentos não recorrentes abaixo</span></div>
+      <div><span class="rail-k">Extraordinárias (obras)</span><span class="rail-v">27.494 → 104.087</span><span class="rail-n">impermeabilização 2024, telhado 2026 — não comparável</span></div>
+    </div>
+
+    <div class="scroller">
+    <table>
+      <caption>Despesas ordinárias por categoria · soma de sete meses (jan–jul)</caption>
+      <thead><tr><th>Categoria</th><th>2024</th><th>2026</th><th>Variação</th></tr></thead>
+      <tbody>
+        <tr><td>Pessoal (colaborador)</td><td class="num">35.910,61</td><td class="num">36.999,26</td><td class="num pos">+3,0%</td></tr>
+        <tr><td>Manutenção predial <span class="quiet">(sem portão)</span></td><td class="num">14.151,08</td><td class="num">8.400,78</td><td class="num pos">−40,6%</td></tr>
+        <tr><td>Portão eletrônico</td><td class="num">3.780,00</td><td class="num">3.340,80</td><td class="num pos">−11,6%</td></tr>
+        <tr><td>Limpeza</td><td class="num"><span class="hint" tabindex="0" data-tip="Material de limpeza R$ 2.009,73 · Dedetização caixa d'água R$ 820,00">2.829,73</span></td><td class="num"><span class="hint" tabindex="0" data-tip="Material de limpeza R$ 3.729,21 · Dedetização caixa d'água R$ 715,00 · Serviços de limpeza avulsos R$ 568,00">5.012,21</span></td><td class="num neg">+77,1%</td></tr>
+        <tr><td>Consumo (água, energia, gás, telefone)</td><td class="num">21.397,47</td><td class="num">28.255,04</td><td class="num neg">+32,0%</td></tr>
+        <tr><td>Gestão e administrativo</td><td class="num">22.705,84</td><td class="num">25.886,05</td><td class="num neg">+14,0%</td></tr>
+        <tr><td>Segurança e monitoramento</td><td class="num"><span class="hint" tabindex="0" data-tip="Monitoramento eletrônico R$ 1.807,94 · Sistema de segurança - peças R$ 417,00 · Sistema de segurança - serviço R$ 120,00">2.344,94</span></td><td class="num"><span class="hint" tabindex="0" data-tip="Monitoramento eletrônico R$ 3.873,18 · Sistema de segurança - peças R$ 445,80">4.318,98</span></td><td class="num neg">+84,2%</td></tr>
+        <tr><td>Seguro predial</td><td class="num">1.918,79</td><td class="num">2.181,72</td><td class="num neg">+13,7%</td></tr>
+        <tr><td class="quiet">Avulsos sem categoria</td><td class="num quiet">200,00</td><td class="num quiet">−52,77</td><td class="num quiet">—</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Subtotal recorrente</td><td class="num">105.238,46</td><td class="num">114.342,07</td><td class="num neg">+8,7%</td></tr>
+        <tr><td class="quiet">Não recorrentes (excluídos acima)</td><td class="num quiet">0,00</td><td class="num quiet">13.161,90</td><td class="num quiet">—</td></tr>
+        <tr><td>Total despesas ordinárias</td><td class="num">105.238,46</td><td class="num">127.503,97</td><td class="num neg">+21,2%</td></tr>
+      </tfoot>
+    </table>
+    </div>
+    <figcaption style="margin-top:var(--s3)">Não recorrentes excluídos do subtotal: honorários de engenharia
+    do laudo estrutural do telhado (R$ 9.750, contabilizado como despesa ordinária apesar de ligado à obra),
+    empréstimo à funcionária (R$ 2.000, adiantamento recuperável, não é custo) e a lavadora de alta pressão
+    (R$ 1.411,90, aquisição de equipamento). Sem excluí-los, a variação nominal seria +21,2% — inflada por
+    três lançamentos que nada têm a ver com o custeio do dia a dia.</figcaption>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Rubricas 2.1.1.x a 2.1.3.x · a maior fatia do custeio</span><h2>Colaborador: o item mais estável da lista</h2></div>
+    <p class="lede">Salários, adiantamento, férias, FGTS, INSS/IRRF/PIS, vale-transporte, cesta básica e
+    assistência médica somaram R$ 35.910,61 em 2024 e R$ 36.999,26 em 2026 — <b>+3,0%</b>, bem abaixo de todas
+    as outras categorias e da própria inflação do período. É o maior bloco de despesa do condomínio e o único
+    que se comportou como um custo administrado deveria: sem sobressalto, com ou sem troca de gestão. A
+    cobertura de férias de terceiro (R$ 2.880,00) e o empréstimo à funcionária (R$ 2.000,00, à parte) só
+    existem em 2026, mas não tiram esse quadro de estabilidade.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Rubrica 2.1.9.55</span><h2>Portão: o contrato estabilizou o custo</h2></div>
+    <p class="lede">Em 2024 não havia contrato de manutenção do portão: cada chamado gerava uma nota fiscal
+    separada, de R$ 190 a R$ 1.130, em cinco dos sete meses. A gestão atual fechou um contrato mensal fixo de
+    R$ 300, e mesmo somando o acidente de maio — R$ 1.240,80, motor batido, evento documentado e único — o
+    total de sete meses caiu de R$ 3.780,00 para R$ 3.340,80. É o único item da lista em que a mudança de
+    gestão reduziu o gasto <em>e</em> a variância ao mesmo tempo. O restante da manutenção predial (sem o
+    portão) caiu ainda mais, −40,6%, em boa parte por não repetir os R$ 5.386,91 de manutenção predial avulsa
+    de 2024.</p>
+  </div>
+
+  <div class="callout">
+    <h3>Limpeza: a cesta mudou, não é só o preço</h3>
+    <p>A compra de 2024 foi uma só — NF-16946, R$ 2.009,73, parcelada em três lançamentos contábeis (1 de 3,
+    2 de 3, 3 de 3) — de sabão em pó, água sanitária, detergente e desengordurante. Em 2026 houve duas compras
+    distintas (NF-78813 em março, NF-80300 em julho), R$ 3.729,21 no total, e a lista de itens passou a incluir
+    papel higiênico, balde e luva. Parte do aumento de 85,6% é cesta maior, não é o mesmo produto custando
+    mais; vale pedir a nota fiscal detalhada antes de tratar isso como reajuste de fornecedor.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Rubricas 2.1.6.1 e 2.1.6.2</span><h2>Custo de gestão também subiu acima do núcleo operacional</h2></div>
+    <div class="rail">
+      <div><span class="rail-k">Síndico + administradora 2024</span><span class="rail-v">R$ 19.032<span class="rail-u">/7 meses</span></span><span class="rail-n">R$ 9.792 + R$ 9.240</span></div>
+      <div><span class="rail-k">Síndico + administradora 2026</span><span class="rail-v alto">R$ 23.844<span class="rail-u">/7 meses</span></span><span class="rail-n">R$ 12.600 + R$ 11.244</span></div>
+      <div><span class="rail-k">Variação</span><span class="rail-v alto">+25,3%</span><span class="rail-n">mais que o dobro da alta do colaborador</span></div>
+    </div>
+    <p class="lede">Reforça o ponto já registrado na aba Economia: não é anômalo para síndico profissional em
+    Curitiba, mas é a maior despesa fixa não obrigatória e, olhando as duas gestões lado a lado, a que mais
+    contrasta com a estabilidade da folha. Vale benchmark na renovação.</p>
+  </div>
+
+  <div class="callout">
+    <h3>TANGISA: de pagamento em dia para onze meses de atraso</h3>
+    <p>Em 2024 a associação faturava a competência do mês anterior e o condomínio pagava em dia — a fatura de
+    12/2023 foi paga em 19/01/2024, a de 06/2024 em 19/07/2024, sempre em torno de trinta dias. O achado A-01
+    já registrou que, em 2026, a mesma associação fatura com quase um ano de atraso. O valor mensal do desconto
+    não mudou (~R$ 250), mas a pontualidade da cobrança, sim — e isso é regressão de governança, não de custo,
+    que não aparece em nenhuma das tabelas acima.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Rubricas 2.2.x · financiadas por Fundo de Obras ou Reserva</span><h2>Extraordinárias: dois projetos, não dois padrões de gestão</h2></div>
+    <p class="lede">R$ 27.493,91 em 2024 (impermeabilização de garagem, R$ 19.833,91, e instalação de novo
+    motor do portão, R$ 2.800,00, entre outros) contra R$ 104.086,86 em 2026 (obra do telhado, R$ 68.925,00,
+    laudo estrutural, R$ 19.500,00, e nova central de interfone, R$ 11.067,06). Não entram na comparação de
+    custeio porque são obras pontuais custeadas por fundo específico, não despesa recorrente — cada gestão
+    lidou com um problema estrutural diferente do prédio, não com um padrão de gasto.</p>
+  </div>
+</div>
+
 <!-- ============ ACHADOS ============ -->
 <div role="tabpanel" id="p-achados" aria-labelledby="t-achados" hidden>
   <div class="block">
@@ -1167,6 +1286,23 @@
       padrão clássico de pagamento em duplicata. A conferência dos comprovantes mostra "Parc. 1 de 2" e
       "Parc. 2 de 2". Está correto.</p>
     </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev info"><i class="dot"></i>Verificar</span><span class="id">A-10</span><span class="rubrica">2.1.4.5</span></div>
+      <h3>Duas faturas de monitoramento cobrando a mesma competência de dezembro/2025</h3>
+      <p>Em 12/01/2026 saíram R$ 569,00 para a J.R. Tiemann Sistemas Integrados, NF-359, descrição
+      "MONITORAMENTO DE ALARMES E LOCAÇÃO DE EQUIPAMENTOS - REF 12/2025". Em 11/02/2026 saíram outros
+      R$ 569,00 para o mesmo fornecedor, NF-483, mesma descrição, mesma referência a dezembro/2025. Duas notas
+      fiscais diferentes cobrando a mesma competência é o padrão clássico de duplicidade — mas também pode ser
+      uma nota de serviço e outra de locação de equipamento, emitidas em separado por coincidência de ciclo de
+      faturamento. A descrição sozinha não distingue as duas hipóteses.</p>
+      <p>Em paralelo, o fornecedor mudou nesse mesmo período: até 2024 o monitoramento era da LPE Comércio e
+      Importação, R$ 190 a R$ 204 por mês, só monitoramento. A J.R. Tiemann cobra R$ 514 a R$ 569, com
+      locação de equipamentos incluída — isso explica boa parte do salto de +114% que aparece no comparativo
+      2024×2026, mas não isenta de checar o pagamento em duplicidade de jan/fev.</p>
+      <div class="acao"><b>Verificar:</b> contrato com a J.R. Tiemann e a nota fiscal detalhada das NF-359 e
+      NF-483, para confirmar se são cobranças distintas ou repetidas.</div>
+    </article>
   </div>
 
   <div class="block">
@@ -1241,6 +1377,16 @@
       mês, R$ 23.844 no período. Não é anômalo para síndico profissional em Curitiba, mas é a maior despesa
       fixa não obrigatória do condomínio e merece benchmark na renovação, sobretudo porque a taxa da
       administradora subiu 6,8% em fevereiro.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Monitoramento eletrônico: escopo mudou, e há uma fatura a esclarecer</h3>
+      <span class="money">R$ 569 a confirmar</span>
+      <p>O salto de +114% na rubrica (achado A-10) não é só reajuste: o fornecedor trocou — da LPE (só
+      monitoramento, R$ 190 a R$ 204/mês) para a J.R. Tiemann (monitoramento e locação de equipamentos, R$ 514
+      a R$ 569/mês) — o que explica a maior parte do aumento. O que não se explica é jan e fev de 2026
+      cobrarem, cada um, R$ 569,00 com a mesma referência "REF 12/2025". Não entrou no total anual abaixo por
+      ser um evento pontual, não recorrente, e ainda sujeito a confirmação com o fornecedor.</p>
     </div>
 
     <div class="total">
