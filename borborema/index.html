@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Auditoria das contas do Condomínio Edifício Borborema, janeiro a julho de 2026.">
+<title>Auditoria Borborema</title>
+<style>
+  :where(html){color-scheme:light}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none !important}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* ============================================================
+     Paleta — verdigris sobre papel esverdeado, madder e ocre.
+     Documento de dia, em tela de escritório: só claro, por escolha.
+     ============================================================ */
+  :root{
+    color-scheme: light;
+
+    --paper:        oklch(0.978 0.004 150);
+    --raised:       oklch(0.997 0.002 150);
+    --sunken:       oklch(0.955 0.006 155);
+
+    --ink:          oklch(0.23 0.018 175);
+    --ink-2:        oklch(0.42 0.016 175);
+    --ink-3:        oklch(0.48 0.014 175);
+
+    --rule:         oklch(0.875 0.010 165);
+    --rule-soft:    oklch(0.930 0.007 165);
+
+    --pinho:        oklch(0.42 0.058 172);
+    --pinho-2:      oklch(0.55 0.055 172);
+    --pinho-tint:   oklch(0.950 0.020 172);
+
+    --madder:       oklch(0.47 0.135 28);
+    --madder-tint:  oklch(0.962 0.018 30);
+
+    --ocre:         oklch(0.46 0.082 92);
+    --ocre-tint:    oklch(0.958 0.026 95);
+
+    --viz-base:     oklch(0.58 0.052 172);
+    --viz-alto:     oklch(0.52 0.130 28);
+    --viz-band:     oklch(0.938 0.010 165);
+    --viz-grid:     oklch(0.905 0.008 165);
+
+    /* escala 4pt */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
+
+    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+    --ease-out:cubic-bezier(0.16,1,0.3,1);
+
+    --z-sticky:10;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:1rem;          /* 16px */
+    line-height:1.5;         /* ritmo de 24px */
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 var(--s6) var(--s24)}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;text-wrap:balance;margin:0;letter-spacing:-.012em}
+  p{margin:0;text-wrap:pretty}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+  /* ---------- cabeçalho ---------- */
+  header.doc{padding:var(--s12) 0 var(--s6)}
+  .kicker{
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--pinho);margin-bottom:var(--s4);display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3)
+  }
+  .kicker span::after{content:"·";margin-left:var(--s3);color:var(--rule)}
+  .kicker span:last-child::after{content:""}
+  h1{font-size:2.625rem;line-height:1.08}
+  header.doc .sub{margin-top:var(--s3);color:var(--ink-2);max-width:64ch;font-size:.9375rem;line-height:1.6}
+
+  /* ---------- abas ---------- */
+  .tabs{
+    display:flex;gap:var(--s1);flex-wrap:wrap;
+    border-bottom:1px solid var(--rule);
+    position:sticky;top:0;z-index:var(--z-sticky);
+    background:var(--paper);padding-top:var(--s3)
+  }
+  .tabs button{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    font:500 .875rem/1.4 var(--sans);color:var(--ink-3);
+    padding:var(--s3) var(--s4);min-height:44px;
+    border-bottom:2px solid transparent;margin-bottom:-1px;
+    transition:color .15s var(--ease-out),border-color .15s var(--ease-out),background-color .15s var(--ease-out);
+    white-space:nowrap;border-radius:2px 2px 0 0
+  }
+  .tabs button:hover{color:var(--ink);background:var(--sunken)}
+  .tabs button:active{background:var(--rule-soft)}
+  .tabs button[aria-selected="true"]{color:var(--pinho);border-bottom-color:var(--pinho)}
+  .tabs button:focus-visible{outline:2px solid var(--pinho);outline-offset:-3px}
+  .tabs .badge{font-family:var(--mono);font-size:.6875rem;color:var(--ink-3);margin-left:var(--s2);font-weight:400}
+  .tabs button[aria-selected="true"] .badge{color:var(--pinho-2)}
+
+  [role="tabpanel"]{padding-top:var(--s8)}
+  [role="tabpanel"][hidden]{display:none !important}
+  @media (prefers-reduced-motion:no-preference){
+    [role="tabpanel"]:not([hidden]){animation:rise .32s var(--ease-out) both}
+    @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  }
+
+  /* ---------- blocos ---------- */
+  .block{margin-bottom:var(--s16)}
+  .block-head{margin-bottom:var(--s6)}
+  .block-head .index{
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:var(--s2)
+  }
+  .block-head h2{font-size:1.6875rem;line-height:1.2}
+  .block-head::after{content:"";display:block;height:1px;background:var(--rule);margin-top:var(--s3)}
+  .lede{color:var(--ink-2);max-width:68ch;margin-bottom:var(--s6);font-size:.9375rem;line-height:1.65}
+  .lede+.lede{margin-top:calc(var(--s6) * -1 + var(--s3))}
+  .lede b{color:var(--ink);font-weight:500}
+
+  /* ---------- trilho de indicadores ---------- */
+  .rail{display:flex;flex-wrap:wrap;margin:0 0 var(--s6)}
+  .rail>div{flex:1 1 168px;padding:0 var(--s4);border-left:1px solid var(--rule-soft);min-width:0}
+  .rail>div:first-child{padding-left:0;border-left:0}
+  .rail-k{display:block;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .rail-v{display:block;font-family:var(--mono);font-size:1.5rem;line-height:1.25;margin-top:var(--s1);font-variant-numeric:tabular-nums}
+  .rail-n{display:block;font-size:.8125rem;color:var(--ink-3);margin-top:2px}
+  .rail-u{font-size:.8125rem;color:var(--ink-3);margin-left:1px}
+  .rail-v.alto{color:var(--madder)}
+  .rail-v.bom{color:var(--pinho)}
+  @media(max-width:640px){
+    .rail>div{flex-basis:calc(50% - 1px);padding:var(--s2) var(--s4);border-left:1px solid var(--rule-soft)}
+    .rail>div:nth-child(odd){padding-left:0;border-left:0}
+  }
+
+  /* ---------- conferência ---------- */
+  .checks{display:flex;flex-direction:column}
+  .check{
+    display:grid;grid-template-columns:auto 1fr auto;gap:var(--s4);align-items:baseline;
+    padding:var(--s3) 0;border-bottom:1px solid var(--rule-soft)
+  }
+  .check:last-child{border-bottom:0}
+  .check .tick{color:var(--pinho);font-size:.8125rem;line-height:1.5}
+  .check .what{font-size:.9375rem;color:var(--ink-2)}
+  .check .val{font-family:var(--mono);font-size:.8125rem;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  @media(max-width:560px){.check{grid-template-columns:auto 1fr}.check .val{grid-column:2}}
+
+  /* ---------- tabelas ---------- */
+  .scroller{overflow-x:auto;margin-inline:-4px;padding-inline:4px}
+  table{border-collapse:collapse;width:100%;font-size:.875rem}
+  caption{text-align:left;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding-bottom:var(--s3)}
+  th{
+    text-align:right;font-weight:500;font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);padding:0 0 var(--s2);border-bottom:1px solid var(--rule);white-space:nowrap
+  }
+  th:first-child{text-align:left}
+  td{padding:var(--s2) 0;border-bottom:1px solid var(--rule-soft);text-align:right;white-space:nowrap}
+  td:first-child{text-align:left;white-space:normal}
+  td+td,th+th{padding-left:var(--s6)}
+  tbody tr:last-child td{border-bottom:none}
+  tfoot td{border-top:1px solid var(--rule);border-bottom:none;padding-top:var(--s3);font-weight:600}
+  .neg{color:var(--madder)} .pos{color:var(--pinho)}
+  .quiet{color:var(--ink-3)}
+  .sub-row td:first-child{padding-left:var(--s4);color:var(--ink-2);font-weight:400}
+  .barcell{text-align:left !important;padding-left:var(--s6);min-width:132px}
+  .bar{display:inline-block;height:6px;border-radius:1px;vertical-align:middle}
+  .bar-r{background:var(--pinho-2)} .bar-d{background:var(--ocre)}
+
+  /* ---------- composição do boleto ---------- */
+  .comp-row{
+    display:grid;grid-template-columns:200px 1fr 92px;gap:var(--s4);align-items:center;
+    padding:var(--s2) 0;border-bottom:1px solid var(--rule-soft)
+  }
+  .comp-row:last-of-type{border-bottom:0}
+  .comp-row .lab{font-size:.875rem}
+  .comp-row .track{height:12px;background:var(--sunken);border-radius:2px;overflow:hidden}
+  .comp-row .fill{display:block;height:100%;background:var(--pinho-2);border-radius:2px}
+  .comp-row .fill.obra{background:var(--ocre)}
+  .comp-row .fill.agua{background:var(--viz-base)}
+  .comp-row .v{text-align:right;font-family:var(--mono);font-size:.875rem;font-variant-numeric:tabular-nums}
+  @media(max-width:620px){.comp-row{grid-template-columns:128px 1fr 80px;gap:var(--s2)}}
+
+  /* ---------- achados ---------- */
+  .find{
+    border:1px solid var(--rule);border-radius:3px;background:var(--raised);
+    padding:var(--s6) var(--s6) var(--s4);margin-bottom:var(--s3)
+  }
+  .find.is-crit{background:var(--madder-tint);border-color:oklch(0.90 0.030 30)}
+  .find.is-quiet{background:transparent;border-style:dashed;border-color:var(--rule)}
+  .find-top{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-bottom:var(--s2)}
+  .sev{
+    display:inline-flex;align-items:center;gap:var(--s2);
+    font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--ink-2)
+  }
+  .sev .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3);flex:none}
+  .sev.crit .dot{background:var(--madder)} .sev.crit{color:var(--madder)}
+  .sev.aten .dot{background:var(--ocre)}   .sev.aten{color:var(--ocre)}
+  .sev.info .dot{background:var(--pinho-2)}.sev.info{color:var(--pinho)}
+  .sev.ok   .dot{background:var(--pinho)}  .sev.ok{color:var(--pinho)}
+  .id{font-family:var(--mono);font-size:.75rem;color:var(--ink-3);letter-spacing:.05em}
+  .rubrica{margin-left:auto;font-family:var(--mono);font-size:.75rem;color:var(--ink-3)}
+  .find h3{font-size:1.1875rem;line-height:1.32;margin-bottom:var(--s2)}
+  .find p{color:var(--ink-2);font-size:.9375rem;line-height:1.6;max-width:70ch}
+  .find p+p{margin-top:var(--s2)}
+  .find .acao{
+    margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--rule-soft);
+    font-size:.875rem;color:var(--ink-2)
+  }
+  .acao b{font-weight:500;color:var(--ink)}
+
+  /* ---------- economia ---------- */
+  .opp{
+    display:grid;grid-template-columns:1fr auto;gap:var(--s1) var(--s6);align-items:baseline;
+    padding:var(--s4) 0;border-bottom:1px solid var(--rule-soft)
+  }
+  .opp:last-of-type{border-bottom:0}
+  .opp h3{font-size:1.0625rem;grid-column:1}
+  .opp .money{
+    grid-column:2;grid-row:1;font-family:var(--mono);font-size:1rem;color:var(--pinho);
+    white-space:nowrap;font-variant-numeric:tabular-nums
+  }
+  .opp p{grid-column:1/-1;color:var(--ink-2);font-size:.9375rem;line-height:1.6;max-width:72ch}
+  .total{
+    margin-top:var(--s6);padding:var(--s4) var(--s6);background:var(--pinho-tint);
+    border:1px solid oklch(0.90 0.030 172);border-radius:3px;
+    display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap
+  }
+  .total span{font-size:.9375rem;color:var(--ink-2);max-width:54ch;line-height:1.55}
+  .total strong{font-family:var(--mono);font-size:1.375rem;color:var(--pinho);font-weight:500}
+
+  .callout{background:var(--sunken);border:1px solid var(--rule);border-radius:3px;padding:var(--s4) var(--s6);margin:var(--s6) 0}
+  .callout h3{font-size:1.0625rem;margin-bottom:var(--s1)}
+  .callout p{font-size:.9375rem;color:var(--ink-2);max-width:70ch;line-height:1.6}
+  .mono-inline{font-family:var(--mono);font-size:.8125rem;background:var(--paper);border:1px solid var(--rule-soft);border-radius:2px;padding:1px 5px;color:var(--ink)}
+
+  ol.docs{margin:0;padding-left:1.4em;color:var(--ink-2);font-size:.9375rem;line-height:1.6}
+  ol.docs li{padding:var(--s1) 0}
+  ol.docs li b{color:var(--ink);font-weight:500}
+  ul.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  ul.steps li{position:relative;padding:0 0 var(--s4) 42px;counter-increment:s;color:var(--ink-2);font-size:.9375rem;line-height:1.6}
+  ul.steps li:last-child{padding-bottom:0}
+  ul.steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;
+    background:var(--pinho-tint);color:var(--pinho);border:1px solid oklch(0.90 0.030 172);
+    font:500 .75rem/1 var(--mono);display:grid;place-items:center
+  }
+  ul.steps li b{color:var(--ink);font-weight:500}
+
+  /* ---------- gráficos ---------- */
+  figure{margin:0}
+  .chart-wrap{background:var(--raised);border:1px solid var(--rule);border-radius:3px;padding:var(--s4) var(--s4) var(--s2);overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto}
+  .legend{display:flex;gap:var(--s6);flex-wrap:wrap;margin-top:var(--s3);font-size:.8125rem;color:var(--ink-2)}
+  .legend span{display:inline-flex;align-items:center;gap:var(--s2)}
+  .swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+  figcaption{margin-top:var(--s3);font-size:.8125rem;color:var(--ink-3);max-width:74ch;line-height:1.55}
+
+  footer{margin-top:var(--s16);padding-top:var(--s4);border-top:1px solid var(--rule);color:var(--ink-3);font-size:.8125rem;line-height:1.6}
+  footer p{max-width:76ch}
+  a{color:var(--pinho)}
+  :focus-visible{outline:2px solid var(--pinho);outline-offset:2px;border-radius:2px}
+
+  /* ---------- impressão: o parecer vai para o conselho ---------- */
+  @media print{
+    body{background:#fff}
+    .wrap{max-width:none;padding:0}
+    .tabs{display:none}
+    [role="tabpanel"][hidden]{display:block !important}
+    [role="tabpanel"]{animation:none;break-before:page;padding-top:var(--s6)}
+    [role="tabpanel"]:first-of-type{break-before:auto}
+    .block,.find,figure,table{break-inside:avoid}
+    .chart-wrap,.find{border-color:#bbb}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc">
+  <div class="kicker"><span>Condomínio Edifício Borborema</span><span>21 unidades</span><span>Curitiba, PR</span></div>
+  <h1>Auditoria das contas<br>de janeiro a julho de 2026</h1>
+  <p class="sub">Leitura integral dos sete livros de prestação de contas da F&amp;N Administradora — 1.419
+  páginas — com reconstrução das rubricas e conciliação lançamento a lançamento contra os extratos Sicredi.
+  As séries de água e energia recuam a janeiro de 2025, com o consumo físico em metros cúbicos e em
+  quilowatts-hora lido das próprias faturas da Sanepar e da Copel anexadas aos comprovantes.</p>
+</header>
+
+<div class="tabs" role="tablist" aria-label="Seções da auditoria">
+  <button role="tab" id="t-panorama" aria-controls="p-panorama" aria-selected="true">Panorama</button>
+  <button role="tab" id="t-taxa" aria-controls="p-taxa" aria-selected="false">Taxa condominial</button>
+  <button role="tab" id="t-agua" aria-controls="p-agua" aria-selected="false">Água</button>
+  <button role="tab" id="t-energia" aria-controls="p-energia" aria-selected="false">Energia</button>
+  <button role="tab" id="t-achados" aria-controls="p-achados" aria-selected="false">Achados<span class="badge">9</span></button>
+  <button role="tab" id="t-economia" aria-controls="p-economia" aria-selected="false">Economia</button>
+</div>
+
+<!-- ============ PANORAMA ============ -->
+<div role="tabpanel" id="p-panorama" aria-labelledby="t-panorama">
+
+  <div class="block">
+    <div class="block-head"><span class="index">Posição em 31 de julho de 2026</span><h2>Onde o condomínio está</h2></div>
+    <div class="rail">
+      <div><span class="rail-k">Saldo total</span><span class="rail-v">92.846</span><span class="rail-n">−7.372 no semestre</span></div>
+      <div><span class="rail-k">Conta corrente</span><span class="rail-v">25.877</span><span class="rail-n">1,9 mês de custeio</span></div>
+      <div><span class="rail-k">Fundo de obra</span><span class="rail-v">44.207</span><span class="rail-n">telhado deve ≈29.000</span></div>
+      <div><span class="rail-k">Inadimplência</span><span class="rail-v">2.955</span><span class="rail-n">nenhuma unidade</span></div>
+    </div>
+    <p class="lede">O condomínio consumiu R$ 7.371,55 de caixa no período. Os dois meses negativos são
+    desembolsos da obra do telhado (março) e o laudo estrutural somado à quarta parcela do telhado (julho).
+    A operação ordinária ainda gera superávit, mas ele encolheu de R$ 6.757 em janeiro para R$ 59 em julho.</p>
+    <div class="scroller">
+    <table>
+      <caption>Receitas, despesas e saldo consolidado por mês</caption>
+      <thead><tr><th>Mês</th><th>Receitas</th><th>Despesas</th><th>Resultado</th><th>Saldo final</th><th class="barcell">Receita / despesa</th></tr></thead>
+      <tbody>
+        <tr><td>Janeiro</td><td class="num">27.060,58</td><td class="num">14.705,46</td><td class="num pos">+12.355,12</td><td class="num">112.572,59</td><td class="barcell"><span class="bar bar-r" style="width:44px"></span><br><span class="bar bar-d" style="width:24px"></span></td></tr>
+        <tr><td>Fevereiro</td><td class="num">29.273,59</td><td class="num">17.609,09</td><td class="num pos">+11.664,50</td><td class="num">124.237,09</td><td class="barcell"><span class="bar bar-r" style="width:48px"></span><br><span class="bar bar-d" style="width:29px"></span></td></tr>
+        <tr><td>Março</td><td class="num">29.057,13</td><td class="num">52.247,11</td><td class="num neg">−23.189,98</td><td class="num">101.047,11</td><td class="barcell"><span class="bar bar-r" style="width:47px"></span><br><span class="bar bar-d" style="width:85px"></span></td></tr>
+        <tr><td>Abril</td><td class="num">32.449,38</td><td class="num">24.237,40</td><td class="num pos">+8.211,98</td><td class="num">109.259,09</td><td class="barcell"><span class="bar bar-r" style="width:53px"></span><br><span class="bar bar-d" style="width:39px"></span></td></tr>
+        <tr><td>Maio</td><td class="num">30.964,31</td><td class="num">27.610,72</td><td class="num pos">+3.353,59</td><td class="num">112.612,68</td><td class="barcell"><span class="bar bar-r" style="width:50px"></span><br><span class="bar bar-d" style="width:45px"></span></td></tr>
+        <tr><td>Junho</td><td class="num">37.393,04</td><td class="num">34.006,47</td><td class="num pos">+3.386,57</td><td class="num">115.999,25</td><td class="barcell"><span class="bar bar-r" style="width:61px"></span><br><span class="bar bar-d" style="width:55px"></span></td></tr>
+        <tr><td>Julho</td><td class="num">38.021,25</td><td class="num">61.174,58</td><td class="num neg">−23.153,33</td><td class="num">92.845,92</td><td class="barcell"><span class="bar bar-r" style="width:62px"></span><br><span class="bar bar-d" style="width:100px"></span></td></tr>
+      </tbody>
+      <tfoot><tr><td>Acumulado</td><td class="num">224.219,28</td><td class="num">231.590,83</td><td class="num neg">−7.371,55</td><td class="num">92.845,92</td><td class="barcell"></td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Verificação aritmética</span><h2>O que fecha</h2></div>
+    <p class="lede">Antes de qualquer juízo sobre mérito, a base foi testada. A escrituração é
+    aritmeticamente íntegra nos sete meses — os achados adiante são de natureza econômica e de controle,
+    não erro de cálculo.</p>
+    <div class="checks">
+      <div class="check"><span class="tick">✓</span><span class="what">Saldo de encerramento de cada mês igual ao saldo de abertura do mês seguinte</span><span class="val">7/7 meses</span></div>
+      <div class="check"><span class="tick">✓</span><span class="what">Saldo corrente do extrato reconstruído lançamento a lançamento, nas seis contas</span><span class="val">591 lançamentos, 0 quebras</span></div>
+      <div class="check"><span class="tick">✓</span><span class="what">Soma das rubricas do demonstrativo igual aos totais publicados de receita e despesa</span><span class="val">7/7 meses</span></div>
+      <div class="check"><span class="tick">✓</span><span class="what">Transferências entre conta corrente e fundos com contrapartida integral</span><span class="val">soma zero</span></div>
+      <div class="check"><span class="tick">✓</span><span class="what">Inadimplência: 2 boletos em aberto, nenhuma unidade inadimplente ao fim de julho</span><span class="val">R$ 2.955,04</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAXA ============ -->
+<div role="tabpanel" id="p-taxa" aria-labelledby="t-taxa" hidden>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Competência jul/2026 · por unidade</span><h2>O que se cobra hoje</h2></div>
+    <p class="lede">As 21 unidades têm frações ideais iguais — todos os boletos do período são idênticos ao
+    centavo. O boleto de julho foi de R$ 1.490,73, e quase um terço dele não é custeio: é capital de obra.</p>
+    <div>
+      <div class="comp-row"><span class="lab">Taxa condominial</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="v">723,11</span></div>
+      <div class="comp-row"><span class="lab">Taxa extraordinária <span class="quiet">(telhado)</span></span><span class="track"><span class="fill obra" style="width:33.4%"></span></span><span class="v">241,38</span></div>
+      <div class="comp-row"><span class="lab">Fundo de obras</span><span class="track"><span class="fill obra" style="width:32.0%"></span></span><span class="v">231,65</span></div>
+      <div class="comp-row"><span class="lab">Água <span class="quiet">(rateio)</span></span><span class="track"><span class="fill agua" style="width:25.3%"></span></span><span class="v">183,15</span></div>
+      <div class="comp-row"><span class="lab">Fundo de reserva</span><span class="track"><span class="fill" style="width:10.0%"></span></span><span class="v">72,31</span></div>
+      <div class="comp-row"><span class="lab">Fundo de pessoal</span><span class="track"><span class="fill" style="width:5.3%"></span></span><span class="v">38,10</span></div>
+    </div>
+    <div class="scroller" style="margin-top:var(--s3)">
+    <table>
+      <tfoot>
+        <tr><td>Total do boleto</td><td class="num">1.489,70</td></tr>
+        <tr><td class="quiet" style="font-weight:400">dos quais capital de obra, temporário</td><td class="num quiet" style="font-weight:400">473,03 · 31,7%</td></tr>
+      </tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Teste de cobertura</span><h2>A taxa é suficiente?</h2></div>
+    <p class="lede">Sim, com folga — mas a folga é da antena, não da taxa. Isolando a água (que é repasse) e
+    os itens não recorrentes do semestre (o empréstimo de R$ 2.000 à zeladora, que é recuperável, e
+    R$ 9.500 de honorários de engenharia ligados ao telhado), o custeio ordinário sustentável é de
+    R$ 13.516 por mês.</p>
+    <div class="scroller">
+    <table>
+      <caption>Cobertura do custeio ordinário, médias de janeiro a julho de 2026</caption>
+      <thead><tr><th>Cenário</th><th>Receita/mês</th><th>Custeio/mês</th><th>Margem</th><th>%</th></tr></thead>
+      <tbody>
+        <tr><td>Receita ordinária completa</td><td class="num">19.456,70</td><td class="num">13.516,18</td><td class="num pos">+5.940,52</td><td class="num pos">30,5%</td></tr>
+        <tr><td>Sem a locação da antena</td><td class="num">15.094,33</td><td class="num">13.516,18</td><td class="num pos">+1.578,15</td><td class="num">10,5%</td></tr>
+        <tr><td>Só a taxa condominial, sem juros, multas nem acordos</td><td class="num">14.115,24</td><td class="num">13.516,18</td><td class="num">+599,06</td><td class="num neg">4,2%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="lede" style="margin-top:var(--s6)">Lido de baixo para cima: <b>a taxa condominial sozinha cobre
+    o custeio com 4% de folga.</b> Tudo o que existe de reserva, de capacidade de absorver imprevisto e de
+    superávit vem da antena — R$ 4.362,37 por mês, 28,7% do valor da taxa. É uma receita de contrato, não
+    de arrecadação.</p>
+
+    <div class="callout">
+      <h3>O risco que dimensiona tudo o mais</h3>
+      <p>Se a locação da antena não for renovada, a taxa condominial precisa ir a R$ 695,12 por unidade só
+      para manter o mesmo custeio. Hoje ela é R$ 723,11. Ou seja: o condomínio já cobra praticamente o valor
+      de que precisaria <em>sem</em> a antena — e é exatamente por isso que existe margem para reduzir.
+      Qualquer redução deve ser aprovada como reversível e condicionada ao contrato.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Por unidade, sem a obra do telhado</span><h2>Proposta de valor mínimo</h2></div>
+    <p class="lede">Dois patamares. O <b>piso técnico</b> cobre o custeio, uma margem operacional de 8% e o
+    fundo de reserva, e nada mais — é o mínimo que se pode aprovar sem operar no vermelho. O
+    <b>recomendado</b> acrescenta um fundo de obras enxuto, porque um prédio que acabou de trocar o telhado
+    e encomendar laudo estrutural não deveria ficar sem caixa de reposição.</p>
+    <div class="scroller">
+    <table>
+      <caption>Construção do valor, por unidade</caption>
+      <thead><tr><th>Componente</th><th>Hoje</th><th>Piso técnico</th><th>Recomendado</th></tr></thead>
+      <tbody>
+        <tr class="sub-row"><td>Custeio ordinário sustentável (ex-água)</td><td class="num quiet">643,63</td><td class="num quiet">643,63</td><td class="num quiet">643,63</td></tr>
+        <tr class="sub-row"><td>margem operacional 8%</td><td class="num quiet">—</td><td class="num quiet">51,49</td><td class="num quiet">51,49</td></tr>
+        <tr class="sub-row"><td>(−) locação da antena</td><td class="num quiet">−207,73</td><td class="num quiet">−207,73</td><td class="num quiet">−207,73</td></tr>
+        <tr><td><b>Taxa condominial</b></td><td class="num">723,11</td><td class="num">487,39</td><td class="num">487,39</td></tr>
+        <tr><td>Fundo de reserva</td><td class="num">72,31</td><td class="num">48,74</td><td class="num">48,74</td></tr>
+        <tr><td>Fundo de pessoal</td><td class="num">38,10</td><td class="num">38,10</td><td class="num">38,10</td></tr>
+        <tr><td>Fundo de obras</td><td class="num">231,65</td><td class="num">—</td><td class="num">100,00</td></tr>
+        <tr><td>Água (rateio ao custo)</td><td class="num">183,15</td><td class="num">162,10</td><td class="num">162,10</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Total mensal por unidade</td><td class="num">1.248,32</td><td class="num">736,33</td><td class="num">836,33</td></tr>
+        <tr><td class="quiet" style="font-weight:400">variação</td><td class="num quiet" style="font-weight:400">—</td><td class="num pos" style="font-weight:400">−41,0%</td><td class="num pos" style="font-weight:400">−33,0%</td></tr>
+      </tfoot>
+    </table>
+    </div>
+    <figcaption style="margin-top:var(--s3)">A coluna "hoje" exclui a taxa extraordinária do telhado
+    (R$ 241,38), que se encerra sozinha — o boleto efetivo de julho foi R$ 1.489,70.</figcaption>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Sequência recomendada</span><h2>Como chegar lá</h2></div>
+    <p class="lede">Receio que reduzir agora não seja prudente, Senhor: a base de custo está subindo, não
+    caindo. Água e energia somam hoje cerca de R$ 1.100 por mês acima do padrão histórico, e reduzir a taxa
+    antes de estancar isso é aprovar um déficit com data marcada.</p>
+    <ul class="steps">
+      <li><b>Agora, estancar.</b> Teste de estanqueidade na água e revisão do contrato de energia. São
+      R$ 1.100 por mês, ou R$ 52 por unidade, que voltam sem assembleia nenhuma.</li>
+      <li><b>Ao encerrar o telhado.</b> A taxa extraordinária cai por si, e o boleto recua R$ 241,38 por
+      unidade, 16% de alívio sem decisão nova. Confirmar antes que o Fundo de Obras (R$ 44.207) cobre as
+      quatro parcelas restantes de R$ 7.250; cobre, com folga de R$ 15.207.</li>
+      <li><b>Assembleia seguinte.</b> Revisar a taxa para o patamar recomendado, com dois condicionantes
+      expressos em ata: contrato da antena vigente e reajustado, e custo de água já normalizado. Aprovar a
+      redução como revisão anual, não como definitiva.</li>
+      <li><b>Manter o Fundo de Reserva em 10% da taxa.</b> É o que a convenção pratica hoje e o que sustenta
+      a cobertura de caixa em torno de três meses de custeio, o piso prudencial.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ ÁGUA ============ -->
+<div role="tabpanel" id="p-agua" aria-labelledby="t-agua" hidden>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Metros cúbicos · faturas Sanepar</span><h2>Consumo, não tarifa</h2></div>
+    <p class="lede">Os livros não trazem o consumo em nenhum relatório, mas as próprias faturas da Sanepar
+    estão anexadas como imagem nos comprovantes de despesa e trazem o quadro "Histórico de consumo/m³".
+    Extraí a leitura de dezoito meses. A resposta é inequívoca.</p>
+
+    <figure>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 720 268" role="img" aria-labelledby="m3-t m3-d">
+          <title id="m3-t">Consumo mensal de água em metros cúbicos, janeiro de 2025 a junho de 2026</title>
+          <desc id="m3-d">Consumo entre 195 e 258 metros cúbicos até março de 2026, subindo a 266, 298 e 267 nos três meses seguintes.</desc>
+          <rect x="56" y="53.6" width="650" height="38.2" fill="var(--viz-band)"></rect>
+          <line x1="56" y1="210" x2="706" y2="210" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="149.4" x2="706" y2="149.4" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="88.8" x2="706" y2="88.8" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="28.1" x2="706" y2="28.1" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <text x="48" y="214" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0</text>
+          <text x="48" y="153" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">100</text>
+          <text x="48" y="92" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">200</text>
+          <text x="48" y="32" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">300</text>
+          <g fill="var(--viz-base)">
+            <rect x="63.0" y="120.9" width="22" height="89.1" rx="2"><title>Jan/2025 · 147 m³</title></rect>
+            <rect x="99.1" y="59.6" width="22" height="150.4" rx="2"><title>Fev/2025 · 248 m³</title></rect>
+            <rect x="135.2" y="69.4" width="22" height="140.6" rx="2"><title>Mar/2025 · 232 m³</title></rect>
+            <rect x="171.3" y="91.8" width="22" height="118.2" rx="2"><title>Abr/2025 · 195 m³</title></rect>
+            <rect x="207.4" y="53.6" width="22" height="156.4" rx="2"><title>Mai/2025 · 258 m³</title></rect>
+            <rect x="243.5" y="79.7" width="22" height="130.3" rx="2"><title>Jun/2025 · 215 m³</title></rect>
+            <rect x="279.6" y="61.5" width="22" height="148.5" rx="2"><title>Jul/2025 · 245 m³</title></rect>
+            <rect x="315.7" y="59.0" width="22" height="151.0" rx="2"><title>Ago/2025 · 249 m³</title></rect>
+            <rect x="351.8" y="68.7" width="22" height="141.3" rx="2"><title>Set/2025 · 233 m³</title></rect>
+            <rect x="387.9" y="65.7" width="22" height="144.3" rx="2"><title>Out/2025 · 238 m³</title></rect>
+            <rect x="424.0" y="67.5" width="22" height="142.5" rx="2"><title>Nov/2025 · 235 m³</title></rect>
+            <rect x="460.1" y="73.6" width="22" height="136.4" rx="2"><title>Dez/2025 · 225 m³</title></rect>
+            <rect x="496.2" y="88.1" width="22" height="121.9" rx="2"><title>Jan/2026 · 201 m³</title></rect>
+            <rect x="532.3" y="70.6" width="22" height="139.4" rx="2"><title>Fev/2026 · 230 m³</title></rect>
+            <rect x="568.4" y="59.0" width="22" height="151.0" rx="2"><title>Mar/2026 · 249 m³</title></rect>
+          </g>
+          <g fill="var(--viz-alto)">
+            <rect x="604.5" y="48.7" width="22" height="161.3" rx="2"><title>Abr/2026 · 266 m³</title></rect>
+            <rect x="640.6" y="29.3" width="22" height="180.7" rx="2"><title>Mai/2026 · 298 m³</title></rect>
+            <rect x="676.7" y="48.1" width="22" height="161.9" rx="2"><title>Jun/2026 · 267 m³</title></rect>
+          </g>
+          <line x1="56" y1="69.9" x2="706" y2="69.9" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4"></line>
+          <text x="60" y="65.5" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">média fev/25–jan/26 · 231 m³</text>
+          <text x="651.6" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="var(--viz-alto)" font-family="IBM Plex Mono, monospace">298</text>
+          <text x="74" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jan/25</text>
+          <text x="182.3" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Abr/25</text>
+          <text x="290.6" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jul/25</text>
+          <text x="398.9" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Out/25</text>
+          <text x="507.2" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jan/26</text>
+          <text x="615.5" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Abr/26</text>
+          <text x="687.7" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jun/26</text>
+          <text x="56" y="252" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Sans, sans-serif">Metros cúbicos por mês de competência · hidrômetro geral</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--viz-base)"></i> Dentro da faixa histórica</span>
+        <span><i class="swatch" style="background:var(--viz-alto)"></i> Acima do recorde anterior (258 m³)</span>
+        <span><i class="swatch" style="background:var(--viz-band);border:1px solid var(--rule)"></i> Faixa fev/25 – jan/26 (195 a 258 m³)</span>
+      </div>
+      <figcaption>Jan/2025 (147 m³) corresponde a um período de leitura curto e foi excluído da média de
+      referência. Leituras acumuladas conferem: 4.316 m³ em 17/12/2025 e 5.827 m³ em 17/06/2026.</figcaption>
+    </figure>
+
+    <div class="rail" style="margin-top:var(--s8)">
+      <div><span class="rail-k">Consumo de referência</span><span class="rail-v">231 m³<span class="rail-u">/mês</span></span><span class="rail-n">fev/25 a jan/26</span></div>
+      <div><span class="rail-k">Consumo abr a jun/26</span><span class="rail-v">277 m³<span class="rail-u">/mês</span></span><span class="rail-n">média dos três meses</span></div>
+      <div><span class="rail-k">Aumento</span><span class="rail-v alto">+46 m³<span class="rail-u">/mês</span></span><span class="rail-n">+19,8% · 2,2 m³ por unidade</span></div>
+      <div><span class="rail-k">Pico mai/2026</span><span class="rail-v alto">+67 m³</span><span class="rail-n">298 m³ · +29% sobre a média</span></div>
+    </div>
+
+    <p class="lede">A tarifa da Sanepar ficou <b>praticamente parada</b> no período. A tarifa mínima
+    residencial de água foi R$ 1.182,28 na fatura de dez/2025, R$ 1.184,26 na de mai/2026 — 0,17% em cinco
+    meses — e só então subiu para R$ 1.211,98 em jun/2026; a faixa de 6 a 10 m³ passou de R$ 1,66 para
+    R$ 1,70 por metro cúbico. Entre dezembro e maio, portanto, com tarifa congelada, a conta subiu 48% e o
+    consumo subiu 32%.</p>
+
+    <div class="callout">
+      <h3>É consumo, e a tarifa progressiva amplifica</h3>
+      <p>Decompondo dezembro de 2025 contra junho de 2026: o consumo cresceu 18,7% e a conta 30,7%. Do
+      aumento de R$ 802,58, cerca de R$ 65 vêm do reajuste tarifário e R$ 737 do consumo — 92%. E como a
+      Sanepar cobra por faixas crescentes (R$ 1,70 na faixa de 6 a 10 m³ contra R$ 9,28 na de 11 a 15 m³),
+      cada 1% de consumo a mais custa aproximadamente 1,5% na conta. Vazamento aqui é caro em progressão.</p>
+    </div>
+
+    <div class="scroller">
+    <table>
+      <caption>Série de consumo · metros cúbicos por competência</caption>
+      <thead><tr><th>Mês</th><th>m³</th><th>Mês</th><th>m³</th><th>Mês</th><th>m³</th></tr></thead>
+      <tbody>
+        <tr><td>Jan/2025</td><td class="num quiet">147</td><td>Jul/2025</td><td class="num">245</td><td>Jan/2026</td><td class="num">201</td></tr>
+        <tr><td>Fev/2025</td><td class="num">248</td><td>Ago/2025</td><td class="num">249</td><td>Fev/2026</td><td class="num">230</td></tr>
+        <tr><td>Mar/2025</td><td class="num">232</td><td>Set/2025</td><td class="num">233</td><td>Mar/2026</td><td class="num">249</td></tr>
+        <tr><td>Abr/2025</td><td class="num">195</td><td>Out/2025</td><td class="num">238</td><td>Abr/2026</td><td class="num neg">266</td></tr>
+        <tr><td>Mai/2025</td><td class="num">258</td><td>Nov/2025</td><td class="num">235</td><td>Mai/2026</td><td class="num neg">298</td></tr>
+        <tr><td>Jun/2025</td><td class="num">215</td><td>Dez/2025</td><td class="num">225</td><td>Jun/2026</td><td class="num neg">267</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">18 meses em reais · fev/2025 a jul/2026</span><h2>O mesmo degrau na conta</h2></div>
+    <p class="lede">A despesa faturada conta a mesma história com um mês de defasagem, porque o pagamento
+    de cada mês liquida a competência anterior. Catorze meses dentro da faixa; a partir de abril de 2026,
+    quatro meses consecutivos rompendo o teto histórico.</p>
+
+    <figure>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 720 268" role="img" aria-labelledby="agua-t agua-d">
+          <title id="agua-t">Despesa mensal de água e esgoto, fevereiro de 2025 a julho de 2026</title>
+          <desc id="agua-d">Catorze meses entre 2.158 e 2.992 reais, seguidos de quatro meses acima do teto histórico, com pico de 3.867,79 em junho de 2026.</desc>
+          <rect x="56" y="64.9" width="650" height="40.4" fill="var(--viz-band)"></rect>
+          <line x1="56" y1="210" x2="706" y2="210" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="161.5" x2="706" y2="161.5" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="113" x2="706" y2="113" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="64.5" x2="706" y2="64.5" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="56" y1="16" x2="706" y2="16" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <text x="48" y="214" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0</text>
+          <text x="48" y="165" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">1.000</text>
+          <text x="48" y="117" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">2.000</text>
+          <text x="48" y="68" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">3.000</text>
+          <text x="48" y="20" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">4.000</text>
+          <g fill="var(--viz-base)">
+            <rect x="63.0" y="105.3" width="22" height="104.7" rx="2"><title>Fev/2025 · R$ 2.158,87</title></rect>
+            <rect x="99.1" y="73.3" width="22" height="136.7" rx="2"><title>Mar/2025 · R$ 2.819,69</title></rect>
+            <rect x="135.2" y="85.7" width="22" height="124.3" rx="2"><title>Abr/2025 · R$ 2.562,47</title></rect>
+            <rect x="171.3" y="98.6" width="22" height="111.4" rx="2"><title>Mai/2025 · R$ 2.297,40</title></rect>
+            <rect x="207.4" y="64.9" width="22" height="145.1" rx="2"><title>Jun/2025 · R$ 2.992,35</title></rect>
+            <rect x="243.5" y="91.4" width="22" height="118.6" rx="2"><title>Jul/2025 · R$ 2.444,52</title></rect>
+            <rect x="279.6" y="70.5" width="22" height="139.5" rx="2"><title>Ago/2025 · R$ 2.876,68</title></rect>
+            <rect x="315.7" y="67.3" width="22" height="142.7" rx="2"><title>Set/2025 · R$ 2.943,42</title></rect>
+            <rect x="351.8" y="80.2" width="22" height="129.8" rx="2"><title>Out/2025 · R$ 2.676,43</title></rect>
+            <rect x="387.9" y="76.2" width="22" height="133.8" rx="2"><title>Nov/2025 · R$ 2.759,87</title></rect>
+            <rect x="424.0" y="78.6" width="22" height="131.4" rx="2"><title>Dez/2025 · R$ 2.709,81</title></rect>
+            <rect x="460.1" y="83.4" width="22" height="126.6" rx="2"><title>Jan/2026 · R$ 2.610,69</title></rect>
+            <rect x="496.2" y="90.4" width="22" height="119.6" rx="2"><title>Fev/2026 · R$ 2.466,68</title></rect>
+            <rect x="532.3" y="79.2" width="22" height="130.8" rx="2"><title>Mar/2026 · R$ 2.696,34</title></rect>
+          </g>
+          <g fill="var(--viz-alto)">
+            <rect x="568.4" y="63.4" width="22" height="146.6" rx="2"><title>Abr/2026 · R$ 3.021,83</title></rect>
+            <rect x="604.5" y="49.3" width="22" height="160.7" rx="2"><title>Mai/2026 · R$ 3.313,06</title></rect>
+            <rect x="640.6" y="22.4" width="22" height="187.6" rx="2"><title>Jun/2026 · R$ 3.867,79</title></rect>
+            <rect x="676.7" y="44.5" width="22" height="165.5" rx="2"><title>Jul/2026 · R$ 3.413,27</title></rect>
+          </g>
+          <line x1="56" y1="81.3" x2="706" y2="81.3" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4"></line>
+          <text x="60" y="77" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">média fev/25–jan/26 · 2.654</text>
+          <text x="651.6" y="17" text-anchor="middle" font-size="11" font-weight="600" fill="var(--viz-alto)" font-family="IBM Plex Mono, monospace">3.868</text>
+          <text x="74" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Fev/25</text>
+          <text x="182.3" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Mai/25</text>
+          <text x="290.6" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Ago/25</text>
+          <text x="398.9" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Nov/25</text>
+          <text x="507.2" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Fev/26</text>
+          <text x="615.5" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Mai/26</text>
+          <text x="687.7" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jul/26</text>
+          <text x="56" y="252" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Sans, sans-serif">Reais por mês de pagamento · rubrica 2.1.8.2 Despesa Água e Esgoto</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--viz-base)"></i> Dentro da faixa histórica</span>
+        <span><i class="swatch" style="background:var(--viz-alto)"></i> Acima do teto histórico</span>
+        <span><i class="swatch" style="background:var(--viz-band);border:1px solid var(--rule)"></i> Faixa histórica (2.159 a 2.992)</span>
+      </div>
+    </figure>
+
+    <div class="rail" style="margin-top:var(--s8)">
+      <div><span class="rail-k">Média de referência</span><span class="rail-v">2.654</span><span class="rail-n">fev/25 a jan/26</span></div>
+      <div><span class="rail-k">Média abr a jul/26</span><span class="rail-v">3.404</span><span class="rail-n">+28,2%</span></div>
+      <div><span class="rail-k">Excedente por mês</span><span class="rail-v">750</span><span class="rail-n">R$ 35,70 por unidade</span></div>
+      <div><span class="rail-k">Se persistir 12 meses</span><span class="rail-v">8.996</span><span class="rail-n">custo anual do desvio</span></div>
+    </div>
+
+    <p class="lede">O rateio cobrado dos condôminos acompanha a despesa com um mês de atraso, de modo que o
+    prejuízo não fica no caixa por muito tempo — mas fica. Em dezoito meses, o rateio arrecadou
+    R$ 48.354,27 contra R$ 50.631,17 pagos à Sanepar: <b>R$ 2.276,90 de sub-recuperação estrutural</b>,
+    cerca de R$ 126 por mês que saem do custeio geral.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Encaminhamento</span><h2>O que fazer</h2></div>
+    <ul class="steps">
+      <li><b>Teste de estanqueidade nas prumadas e no barrilete.</b> Com a tarifa descartada como causa,
+      resta consumo: ou vazamento, ou mudança de uso. A subida progressiva de 201 para 298 m³ em quatro
+      meses, com leve recuo depois, é a assinatura de vazamento em ramal enterrado ou de boia de caixa
+      d'água com folga, não de mais moradores, que produziria degrau e não rampa.</li>
+      <li><b>Leitura do hidrômetro geral confrontada com a soma dos individuais.</b> O hidrômetro geral marcava 5.827 m³ em 17/06/2026. Se a diferença contra a soma dos medidores das
+      unidades cresceu junto com a conta, a perda está na área comum; se não cresceu, o consumo mudou
+      dentro das unidades e a discussão é de rateio, não de manutenção.</li>
+      <li><b>Verificar o registro "TAMPÃO".</b> As faturas de janeiro a maio trazem esse complemento no
+      lançamento contábil e as de junho e julho não. Vale confirmar com a Sanepar se houve troca de
+      hidrômetro ou de regime de medição, porque coincide com o início do degrau.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ ENERGIA ============ -->
+<div role="tabpanel" id="p-energia" aria-labelledby="t-energia" hidden>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Faturas Copel · duas unidades consumidoras</span><h2>Duas contas, dois problemas opostos</h2></div>
+    <p class="lede">O condomínio tem duas unidades consumidoras na Copel: a área comum e o relógio da
+    zeladoria. Extraí o consumo em kWh das faturas anexadas aos comprovantes, e os dois medidores contam
+    histórias contrárias. Na área comum o consumo praticamente não mudou e o preço por kWh disparou; na
+    zeladoria a tarifa é a mesma e o consumo triplicou.</p>
+
+    <div class="callout">
+      <h3>Correção a um achado anterior</h3>
+      <p>A versão inicial deste relatório registrou que a adesão à TANGISA não produzira economia. A leitura
+      das faturas mostra que o diagnóstico estava errado no mecanismo: a TANGISA <em>não</em> é custo
+      adicional, e sim substituição com desconto. O problema é outro, e maior — a compensação de energia
+      desapareceu da fatura da Copel a partir de janeiro de 2026.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Área comum · unidade consumidora principal</span><h2>O consumo não mudou. O preço, sim.</h2></div>
+
+    <div class="rail">
+      <div><span class="rail-k">Consumo médio 2025</span><span class="rail-v">659 kWh<span class="rail-u">/mês</span></span><span class="rail-n">12 meses</span></div>
+      <div><span class="rail-k">Consumo médio 2026</span><span class="rail-v">676 kWh<span class="rail-u">/mês</span></span><span class="rail-n">jan a jun</span></div>
+      <div><span class="rail-k">Variação de consumo</span><span class="rail-v bom">+17 kWh<span class="rail-u">/mês</span></span><span class="rail-n">+2,5% · irrelevante</span></div>
+      <div><span class="rail-k">Variação de preço</span><span class="rail-v alto">+24,1%</span><span class="rail-n">R$ 0,746 → R$ 0,926 por kWh</span></div>
+    </div>
+
+    <figure>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 720 262" role="img" aria-labelledby="kwh-t kwh-d">
+          <title id="kwh-t">Custo por quilowatt-hora da área comum, dezembro de 2025 a junho de 2026</title>
+          <desc id="kwh-d">R$ 0,671 por kWh em dezembro de 2025, saltando para cerca de R$ 0,96 a partir de janeiro de 2026 e permanecendo nesse patamar até junho.</desc>
+          <line x1="60" y1="210" x2="700" y2="210" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="60" y1="165.9" x2="700" y2="165.9" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="60" y1="121.8" x2="700" y2="121.8" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="60" y1="77.7" x2="700" y2="77.7" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <line x1="60" y1="33.6" x2="700" y2="33.6" stroke="var(--viz-grid)" stroke-width="1"></line>
+          <text x="52" y="214" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0,00</text>
+          <text x="52" y="170" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0,25</text>
+          <text x="52" y="126" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0,50</text>
+          <text x="52" y="82" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">0,75</text>
+          <text x="52" y="38" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">1,00</text>
+
+          <g fill="var(--viz-base)">
+            <rect x="77.7" y="91.7" width="56" height="118.3" rx="2"><title>Dez/2025 · R$ 0,671 por kWh · 666 kWh · R$ 447,09</title></rect>
+          </g>
+          <g fill="var(--viz-alto)">
+            <rect x="169.1" y="38.6" width="56" height="171.4" rx="2"><title>Jan/2026 · R$ 0,972 por kWh · 669 kWh · R$ 649,95</title></rect>
+            <rect x="260.5" y="40.5" width="56" height="169.5" rx="2"><title>Fev/2026 · R$ 0,961 por kWh · 637 kWh · R$ 612,35</title></rect>
+            <rect x="351.9" y="43.5" width="56" height="166.5" rx="2"><title>Mar/2026 · R$ 0,944 por kWh · 658 kWh · R$ 621,40</title></rect>
+            <rect x="443.3" y="44.8" width="56" height="165.2" rx="2"><title>Abr/2026 · R$ 0,937 por kWh · 677 kWh · R$ 634,41</title></rect>
+            <rect x="534.7" y="38.9" width="56" height="171.1" rx="2"><title>Mai/2026 · R$ 0,970 por kWh · 670 kWh · R$ 649,69</title></rect>
+            <rect x="626.1" y="36.4" width="56" height="173.6" rx="2"><title>Jun/2026 · R$ 0,984 por kWh · 742 kWh · R$ 730,00</title></rect>
+          </g>
+
+          <line x1="60" y1="78.5" x2="700" y2="78.5" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="5 4"></line>
+          <text x="64" y="74" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">média 2025 · R$ 0,746</text>
+          <text x="105.7" y="87" text-anchor="middle" font-size="11" font-weight="600" fill="var(--pinho)" font-family="IBM Plex Mono, monospace">0,67</text>
+          <text x="654.1" y="31.5" text-anchor="middle" font-size="11" font-weight="600" fill="var(--viz-alto)" font-family="IBM Plex Mono, monospace">0,98</text>
+
+          <text x="105.7" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Dez/25</text>
+          <text x="197.1" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jan/26</text>
+          <text x="288.5" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Fev/26</text>
+          <text x="379.9" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Mar/26</text>
+          <text x="471.3" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Abr/26</text>
+          <text x="562.7" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Mai/26</text>
+          <text x="654.1" y="228" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">Jun/26</text>
+          <text x="60" y="248" font-size="10.5" fill="var(--ink-3)" font-family="IBM Plex Sans, sans-serif">Reais por kWh faturado · valor total da conta dividido pelo consumo do mês</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--viz-base)"></i> Com compensação de geração distribuída</span>
+        <span><i class="swatch" style="background:var(--viz-alto)"></i> Sem compensação</span>
+      </div>
+      <figcaption>Um degrau de 45% em um único mês. Reajuste tarifário não se comporta assim, e de todo
+      modo a tarifa caiu: a TE passou de R$ 0,375105 para R$ 0,372965 e a TUSD de R$ 0,498814 para
+      R$ 0,496843 entre as duas faturas.</figcaption>
+    </figure>
+
+    <div class="callout">
+      <h3>A linha que sumiu da fatura</h3>
+      <p>A conta de dez/2025 traz duas linhas de crédito: <span class="mono-inline">ENERGIA INJ. OUC MPT TE
+      12/2025 GDI</span>, −300 kWh a R$ 0,275733, e <span class="mono-inline">ENERGIA INJ. OUC MPT TUSD</span>,
+      −300 kWh a R$ 0,366670. São R$ 192,72 de abatimento, mais os créditos de bandeira, sobre um consumo
+      bruto de 666 kWh. A conta de jun/2026 tem apenas consumo, uso do sistema, bandeira amarela e
+      iluminação pública: <b>nenhuma linha de injeção</b>. Os 300 kWh mensais de energia compensada
+      simplesmente deixaram de ser creditados, ao custo de aproximadamente R$ 201 por mês, ou R$ 2.400 ao
+      ano.</p>
+    </div>
+
+    <div class="scroller">
+    <table>
+      <caption>Consumo da área comum · kWh por competência</caption>
+      <thead><tr><th>Mês</th><th>kWh</th><th>Mês</th><th>kWh</th><th>Mês</th><th>kWh</th></tr></thead>
+      <tbody>
+        <tr><td>Jan/2025</td><td class="num">644</td><td>Jul/2025</td><td class="num">652</td><td>Jan/2026</td><td class="num">669</td></tr>
+        <tr><td>Fev/2025</td><td class="num">672</td><td>Ago/2025</td><td class="num">699</td><td>Fev/2026</td><td class="num">637</td></tr>
+        <tr><td>Mar/2025</td><td class="num">658</td><td>Set/2025</td><td class="num">642</td><td>Mar/2026</td><td class="num">658</td></tr>
+        <tr><td>Abr/2025</td><td class="num">682</td><td>Out/2025</td><td class="num">728</td><td>Abr/2026</td><td class="num">677</td></tr>
+        <tr><td>Mai/2025</td><td class="num">620</td><td>Nov/2025</td><td class="num">620</td><td>Mai/2026</td><td class="num">670</td></tr>
+        <tr><td>Jun/2025</td><td class="num">627</td><td>Dez/2025</td><td class="num">666</td><td>Jun/2026</td><td class="num">742</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="4">Média mensal de 2025</td><td class="num">659</td><td class="num">676 em 2026</td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Zeladoria · unidade consumidora secundária</span><h2>Aqui é consumo, e triplicou</h2></div>
+    <p class="lede">O relógio da zeladoria consumia entre 61 e 67 kWh por mês de forma estável desde meados
+    de 2025. Em março começou a subir e não parou. O preço por kWh é o mesmo nas duas pontas — R$ 0,99 em
+    dezembro e R$ 0,98 em junho — de modo que aqui não há dúvida de causa.</p>
+
+    <div>
+      <div class="comp-row"><span class="lab">Dez/2025 <span class="quiet">leitura 12.433 → 12.500</span></span><span class="track"><span class="fill" style="width:32.4%"></span></span><span class="v">67 kWh</span></div>
+      <div class="comp-row"><span class="lab">Mar/2026</span><span class="track"><span class="fill" style="width:30.4%"></span></span><span class="v">63 kWh</span></div>
+      <div class="comp-row"><span class="lab">Abr/2026</span><span class="track"><span class="fill" style="width:35.3%"></span></span><span class="v">73 kWh</span></div>
+      <div class="comp-row"><span class="lab">Mai/2026</span><span class="track"><span class="fill obra" style="width:49.3%"></span></span><span class="v">102 kWh</span></div>
+      <div class="comp-row"><span class="lab">Jun/2026 <span class="quiet">leitura 12.890 → 13.097</span></span><span class="track"><span class="fill agua" style="width:100%"></span></span><span class="v">207 kWh</span></div>
+    </div>
+
+    <div class="rail" style="margin-top:var(--s6)">
+      <div><span class="rail-k">Patamar estável</span><span class="rail-v">63 kWh<span class="rail-u">/mês</span></span><span class="rail-n">jul a dez/2025</span></div>
+      <div><span class="rail-k">Junho de 2026</span><span class="rail-v alto">207 kWh<span class="rail-u">/mês</span></span><span class="rail-n">R$ 203,66</span></div>
+      <div><span class="rail-k">Aumento</span><span class="rail-v alto">+144 kWh<span class="rail-u">/mês</span></span><span class="rail-n">+229%</span></div>
+      <div><span class="rail-k">Se persistir</span><span class="rail-v">R$ 1.690<span class="rail-u">/ano</span></span><span class="rail-n">a R$ 0,98 por kWh</span></div>
+    </div>
+
+    <p class="lede">Um ponto de consumo pequeno que quadruplica em quatro meses costuma ser uma de três
+    coisas: aquecedor ou chuveiro ligado em circuito da zeladoria, bomba operando fora de ciclo, ou ligação
+    indevida a partir daquele quadro. Nenhuma delas se resolve pela conta; todas se resolvem com uma
+    inspeção do quadro e um medidor alicate por circuito.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Consórcio de geração distribuída</span><h2>O que a fatura da TANGISA realmente diz</h2></div>
+    <p class="lede">A fatura traz a economia declarada, o que permite avaliá-la sem depender do contrato. A
+    paga em 20/07/2026 informa: custo total sem TANGISA R$ 310,51, custo com TANGISA R$ 273,25, economia do
+    mês R$ 37,26 — <b>12,0%</b>. O histórico impresso na mesma fatura mostra R$ 42,83, R$ 43,31 e R$ 37,26
+    nos meses anteriores. É desconto real, modesto e coerente com o que esse tipo de consórcio oferece.</p>
+    <p class="lede">Duas coisas, porém, chamam atenção. A primeira é o atraso: essa fatura, paga em julho de
+    2026, refere-se à competência de <b>agosto de 2025</b>, onze meses antes. Isso explica a periodicidade
+    errática dos pagamentos, concentrados em fevereiro, maio, junho e julho, somando R$ 1.243,29 — não é
+    despesa corrente, é acerto de atrasado. A segunda é que a fatura acompanha uma conta da Copel de
+    ago/2025 que <em>tem</em> as linhas de injeção; as contas de 2026 não têm.</p>
+
+    <div class="scroller">
+    <table>
+      <caption>Decomposição do aumento da rubrica 2.1.8.1 · média mensal</caption>
+      <thead><tr><th>Componente</th><th>2025</th><th>2026</th><th>Δ mês</th><th>Natureza</th></tr></thead>
+      <tbody>
+        <tr><td>Copel — efeito preço</td><td class="num quiet">—</td><td class="num quiet">—</td><td class="num neg">+138,42</td><td>compensação perdida</td></tr>
+        <tr><td>Copel — efeito volume</td><td class="num quiet">—</td><td class="num quiet">—</td><td class="num neg">+34,90</td><td>zeladoria</td></tr>
+        <tr><td>TANGISA (competências de 2025)</td><td class="num">0,00</td><td class="num">177,61</td><td class="num">+177,61</td><td>acerto de atrasado</td></tr>
+        <tr><td>Lançamento avulso de maio</td><td class="num quiet">—</td><td class="num quiet">—</td><td class="num">+20,35</td><td>não recorrente</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Rubrica 2.1.8.1</td><td class="num">538,43</td><td class="num">909,86</td><td class="num neg">+371,43</td><td>+69,0%</td></tr>
+      </tfoot>
+    </table>
+    </div>
+    <figcaption style="margin-top:var(--s3)">Do aumento da conta da Copel isoladamente (+R$ 173,32 por mês,
+    +32,2%), <b>80% é preço e 20% é volume</b>. Espelho exato da água, onde 92% é volume e 8% é tarifa.</figcaption>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Encaminhamento</span><h2>O que fazer</h2></div>
+    <ul class="steps">
+      <li><b>Cobrar da TANGISA e da Copel a retomada da compensação.</b> É o item mais caro e o mais
+      simples de provar: basta comparar a fatura de dez/2025, que tem as linhas de injeção de 300 kWh, com
+      a de jun/2026, que não tem. Vale cerca de R$ 201 por mês. Se o contrato foi encerrado ou suspenso,
+      isso precisa constar em algum lugar — e não consta.</li>
+      <li><b>Exigir da TANGISA o extrato de competências em aberto.</b> Faturas com onze meses de atraso
+      impedem qualquer conferência mensal e podem esconder cobrança em duplicidade. Peça a relação completa
+      de competências faturadas, pagas e pendentes.</li>
+      <li><b>Inspecionar o quadro da zeladoria com medidor alicate, circuito a circuito.</b> São +144 kWh
+      por mês em um ponto que consumia 63. Comparar também com a leitura registrada na fatura: 13.097 kWh
+      em 17/06/2026.</li>
+      <li><b>Só então avaliar o plano TANGISA.</b> Com a compensação funcionando, 12% de desconto sobre a
+      energia compensada é razoável. Sem ela, o condomínio paga a associação e a distribuidora pela mesma
+      energia.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ ACHADOS ============ -->
+<div role="tabpanel" id="p-achados" aria-labelledby="t-achados" hidden>
+  <div class="block">
+    <div class="block-head"><span class="index">Ordenados por materialidade</span><h2>Achados</h2></div>
+    <p class="lede">Cada item traz a rubrica contábil de origem, para conferência direta no livro do mês
+    correspondente. Nenhum é acusação de irregularidade: são desvios que a documentação disponível não
+    explica sozinha.</p>
+
+    <article class="find is-crit">
+      <div class="find-top"><span class="sev crit"><i class="dot"></i>Material</span><span class="id">A-01</span><span class="rubrica">2.1.8.1</span></div>
+      <h3>A compensação de energia sumiu da fatura da Copel em janeiro e ninguém notou</h3>
+      <p>A rubrica saiu de R$ 538,43 por mês em 2025 para R$ 909,86 em 2026, alta de 69%. Não é consumo: a
+      área comum passou de 659 para 676 kWh mensais, 2,5%. Não é tarifa: a TE caiu de R$ 0,375105 para
+      R$ 0,372965 e a TUSD de R$ 0,498814 para R$ 0,496843.</p>
+      <p>A fatura de dez/2025 credita 300 kWh de geração distribuída em duas linhas de injeção, R$ 192,72 de
+      abatimento. A de jun/2026 não tem nenhuma linha de injeção. O custo por kWh saltou de R$ 0,671 para
+      R$ 0,972 em um único mês e ficou lá. São cerca de R$ 201 por mês, R$ 2.400 ao ano — e o condomínio
+      seguiu pagando a TANGISA nesse intervalo.</p>
+      <p>Em separado, o relógio da zeladoria subiu de 63 para 207 kWh entre março e junho, +229%, ao mesmo
+      preço por kWh. Esse, sim, é consumo. Análise completa na aba Energia.</p>
+      <div class="acao"><b>Verificar:</b> por que a compensação cessou, o extrato de competências em aberto
+      na TANGISA, e o quadro elétrico da zeladoria com medidor alicate.</div>
+    </article>
+
+    <article class="find is-crit">
+      <div class="find-top"><span class="sev crit"><i class="dot"></i>Material</span><span class="id">A-02</span><span class="rubrica">2.1.8.2</span></div>
+      <h3>O consumo de água mudou de patamar em abril e não retornou</h3>
+      <p>Catorze meses dentro de uma faixa de R$ 2.158 a R$ 2.992; quatro meses consecutivos acima do teto
+      a partir de abril de 2026, com pico de R$ 3.867,79 em junho. Excedente de R$ 750 por mês, R$ 8.996 no
+      ano se persistir.</p>
+      <p>O consumo medido nas faturas confirma: média de 231 m³ nos doze meses de referência contra 277 m³
+      entre abril e junho, com recorde de 298 m³ em maio. A tarifa subiu 2,4% no mesmo intervalo, logo 92%
+      do aumento é consumo. Análise completa na aba Água.</p>
+      <div class="acao"><b>Verificar:</b> teste de estanqueidade e leitura do hidrômetro geral contra a soma
+      dos individuais.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev aten"><i class="dot"></i>Controle</span><span class="id">A-03</span><span class="rubrica">2.1.1.14</span></div>
+      <h3>Empréstimo de R$ 2.000 à funcionária lançado como despesa, sem registro de recuperação</h3>
+      <p>Em 10/03 saiu do caixa um empréstimo à zeladora, com a observação de desconto em folha em dez
+      vezes. O valor foi classificado em "Com Pessoal", como despesa do mês, e não como adiantamento a
+      recuperar.</p>
+      <p>Nos quatro meses seguintes não há rubrica de receita ou de estorno registrando as parcelas
+      devolvidas. Ou o desconto está embutido na folha sem evidência no demonstrativo, ou não está sendo
+      feito. Em ambos os casos, não há saldo devedor controlado em lugar algum da prestação de contas.</p>
+      <div class="acao"><b>Verificar:</b> holerites de abril a julho e o saldo remanescente do empréstimo.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev aten"><i class="dot"></i>Atenção</span><span class="id">A-04</span><span class="rubrica">2.1.2.1</span></div>
+      <h3>FGTS oscila entre R$ 215,62 e R$ 597,89 com folha praticamente estável</h3>
+      <p>Os recolhimentos foram 597,89 · 489,89 · 490,69 · 215,62 · 489,63 · 218,71 · 256,37. A folha variou
+      pouco no período, e a alternância entre patamares de cerca de R$ 490 e R$ 218 não segue sazonalidade
+      evidente de férias ou rescisão.</p>
+      <div class="acao"><b>Verificar:</b> guias do FGTS Digital e base de cálculo mês a mês. Diferenças de
+      recolhimento geram passivo trabalhista com juros.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev info"><i class="dot"></i>Verificar</span><span class="id">A-05</span><span class="rubrica">2.2.1.2</span></div>
+      <h3>Duas parcelas do interfone liquidadas no mesmo dia, uma delas antecipada</h3>
+      <p>Em 10/07 foram pagos dois boletos idênticos de R$ 2.689,02 à Megatel, referentes às parcelas 3/8 e
+      4/8 da mesma NF-160. O comprovante da parcela 4 traz vencimento igual à data de liquidação:
+      antecipação, portanto, e não duplicidade de pagamento.</p>
+      <p>O contrato soma R$ 21.823,14 (entrada de R$ 3.000 mais sete parcelas). Antecipar parcela sem
+      desconto, com o caixa rendendo, custa dinheiro em vez de poupar.</p>
+      <div class="acao"><b>Verificar:</b> se houve deságio na antecipação e qual o preço à vista do contrato.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev info"><i class="dot"></i>Verificar</span><span class="id">A-06</span><span class="rubrica">2.1.6.85 · 2.2.1.46</span></div>
+      <h3>R$ 29.000 em honorários de engenharia concentrados em dois meses e um único fornecedor</h3>
+      <p>A Fabrin Serviços Técnicos recebeu R$ 4.750 em junho, R$ 4.750 em julho e R$ 19.500 pelo laudo
+      estrutural em 14/07. É o segundo maior desembolso do semestre, atrás apenas da obra do telhado, e não
+      há nos livros registro de tomada de preços.</p>
+      <div class="acao"><b>Verificar:</b> proposta, escopo do laudo estrutural e as cotações concorrentes,
+      se houve.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev info"><i class="dot"></i>Descasamento</span><span class="id">A-07</span><span class="rubrica">2.2.2.50 × 1.2.1.5</span></div>
+      <h3>A obra do telhado consumiu R$ 68.925 e a taxa extraordinária arrecadou R$ 15.932</h3>
+      <p>A diferença vem do Fundo de Obras, que caiu de R$ 81.017 em março para R$ 44.207 em julho mesmo
+      com aporte mensal e rendimento. Restam quatro parcelas de R$ 7.250 da estrutura, e o fundo cobre, com
+      folga de R$ 15.207.</p>
+      <div class="acao"><b>Verificar:</b> se a arrecadação extraordinária aprovada na AGE de 29/01 cobre o
+      orçamento total ou se o fundo será reposto por rateio futuro.</div>
+    </article>
+
+    <article class="find">
+      <div class="find-top"><span class="sev info"><i class="dot"></i>Governança</span><span class="id">A-08</span><span class="rubrica">2.1.1.8</span></div>
+      <h3>Cobertura de férias contratada com pessoa de mesmo sobrenome da funcionária afastada</h3>
+      <p>O pagamento de R$ 2.880,00 em 03/07 pela cobertura das férias foi feito a uma prestadora de
+      serviços cujo sobrenome coincide com o da zeladora efetiva. A coincidência não é irregularidade,
+      mas exige registro formal.</p>
+      <div class="acao"><b>Verificar:</b> contrato ou recibo de prestação de serviço e ciência do conselho.</div>
+    </article>
+
+    <article class="find is-quiet">
+      <div class="find-top"><span class="sev ok"><i class="dot"></i>Descartado</span><span class="id">A-09</span><span class="rubrica">2.2.2.50</span></div>
+      <h3>Os pagamentos repetidos à Perfect Telhados não são duplicidade</h3>
+      <p>Os valores de R$ 700,00 e R$ 725,00 aparecem idênticos em 25/06 e 24/07, com a mesma NF-48 e 43,
+      padrão clássico de pagamento em duplicata. A conferência dos comprovantes mostra "Parc. 1 de 2" e
+      "Parc. 2 de 2". Está correto.</p>
+    </article>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Para fechar os achados</span><h2>Documentos a solicitar</h2></div>
+    <p class="lede">A prestação de contas é internamente consistente; o que falta está fora dela. Sugiro
+    pedir à administradora, em um único ofício:</p>
+    <ol class="docs">
+      <li><b>Contrato TANGISA-PR e extrato de competências</b> faturadas, pagas e pendentes, mais a explicação formal da Copel para a ausência de linhas de injeção nas faturas de 2026 — fecha A-01. O consumo em kWh já foi levantado das próprias faturas; falta explicar a perda da compensação.</li>
+      <li><b>Medições individuais das unidades</b> confrontadas com o hidrômetro geral (5.827 m³ em 17/06/2026), laudo de estanqueidade e esclarecimento sobre o registro "TAMPÃO" — fecha A-02. O consumo em m³ já foi levantado das próprias faturas; falta localizar a perda.</li>
+      <li><b>Holerites de março a julho</b> da zeladora, com o saldo devedor do empréstimo, e as guias do FGTS Digital — fecha A-03 e A-04.</li>
+      <li><b>Proposta e escopo do laudo estrutural</b> da Fabrin, mais eventuais cotações concorrentes — fecha A-06.</li>
+      <li><b>Contrato de locação da antena</b>, com prazo, cláusula de reajuste e data de renovação — sustenta a decisão sobre a taxa.</li>
+      <li><b>Orçamento total aprovado na AGE de 29/01</b> para a obra do telhado, confrontado com o desembolsado — fecha A-07.</li>
+      <li><b>Convenção e regimento vigentes</b>, para confirmar o percentual mínimo de fundo de reserva antes de qualquer proposta de redução.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============ ECONOMIA ============ -->
+<div role="tabpanel" id="p-economia" aria-labelledby="t-economia" hidden>
+  <div class="block">
+    <div class="block-head"><span class="index">Eficiência financeira</span><h2>Onde há dinheiro parado</h2></div>
+    <p class="lede">Nenhuma destas oportunidades depende de cortar serviço nem de renegociar contrato de
+    obra. São falhas de tesouraria e de indexação, com valores estimados em base anual a partir das taxas
+    efetivamente observadas nos extratos.</p>
+
+    <div class="opp">
+      <h3>Água e energia acima do padrão histórico</h3>
+      <span class="money">≈ R$ 13.100 /ano</span>
+      <p>O degrau da água vale R$ 8.996 ao ano, o retorno da compensação de energia R$ 2.400 e a
+      normalização do relógio da zeladoria R$ 1.690. É a maior economia disponível e a única que independe
+      de assembleia, mas exige diagnóstico técnico, não corte.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Saldo ocioso em conta corrente</h3>
+      <span class="money">≈ R$ 3.100 /ano</span>
+      <p>A conta corrente manteve saldo médio de R$ 30.229,80 ao longo dos sete meses, sem qualquer
+      remuneração. À taxa que o próprio Fundo de Reserva rendeu no mesmo banco (0,87% ao mês), esse caixa
+      deixou de render cerca de R$ 1.820 apenas de janeiro a julho. Uma aplicação com liquidez diária
+      resolve sem alterar a rotina de pagamentos.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Tarifas bancárias</h3>
+      <span class="money">≈ R$ 1.080 /ano</span>
+      <p>R$ 630,46 em sete meses, entre cesta de relacionamento (R$ 17,55 ao mês), tarifa fixa de R$ 4,00 e
+      R$ 2,80 a R$ 3,50 por boleto liquidado. Um condomínio com vinte e uma unidades costuma obter isenção
+      de cesta no próprio Sicredi mediante reciprocidade, que já existe, dados os saldos aplicados.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Fundos com rentabilidades diferentes na mesma instituição</h3>
+      <span class="money">≈ R$ 930 /ano</span>
+      <p>No mesmo período e no mesmo Sicredi, o Fundo de Reserva rendeu em média 0,86% ao mês, o Fundo de
+      Obra 0,77% e o Fundo de Pessoal apenas 0,51%, pouco mais da metade. Não há razão econômica para três
+      aplicações distintas; é provável que sejam produtos diferentes contratados em épocas diferentes.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Locação da antena sem reajuste aparente</h3>
+      <span class="money">R$ 52.348 /ano em jogo</span>
+      <p>A receita é de R$ 4.362,37 há treze meses consecutivos, ao centavo, e antes disso era R$ 4.149,50,
+      de modo que houve um único reajuste, em outubro de 2025. É a segunda maior receita do condomínio e
+      responde por 28,7% do valor da taxa condominial. Cada ponto percentual de correção vale R$ 523 por ano.</p>
+    </div>
+
+    <div class="opp">
+      <h3>Custo de gestão</h3>
+      <span class="money">15,3% da receita ordinária</span>
+      <p>Administradora (R$ 1.621) mais honorários de síndico profissional (R$ 1.800) somam R$ 3.421 por
+      mês, R$ 23.844 no período. Não é anômalo para síndico profissional em Curitiba, mas é a maior despesa
+      fixa não obrigatória do condomínio e merece benchmark na renovação, sobretudo porque a taxa da
+      administradora subiu 6,8% em fevereiro.</p>
+    </div>
+
+    <div class="total">
+      <span>Ganho anual estimado sem tocar em nenhum contrato de serviço: tesouraria, indexação, tarifas e
+      normalização de água e energia.</span>
+      <strong>≈ R$ 18.500</strong>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Análise elaborada a partir dos sete arquivos de prestação de contas emitidos pela F&amp;N Administradora
+  de Condomínios entre fevereiro e agosto de 2026, com extração integral de texto e reconstrução das
+  rubricas. Os valores foram conferidos contra os extratos analíticos das seis contas Sicredi; a série
+  histórica de água e energia vem dos quadros comparativos de doze meses dos livros de janeiro e julho, e o
+  consumo físico, em metros cúbicos e quilowatts-hora, foi lido por reconhecimento óptico das faturas da
+  Sanepar e da Copel anexadas aos comprovantes de despesa, incluindo os itens de tarifa e de compensação.
+  Estimativas de economia usam as taxas de rendimento observadas nos próprios extratos e estão sinalizadas
+  como aproximações.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab, moveFocus){
+    tabs.forEach(function(t){
+      var sel = t === tab;
+      t.setAttribute('aria-selected', sel ? 'true' : 'false');
+      t.tabIndex = sel ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !sel;
+    });
+    if(moveFocus) tab.focus();
+  }
+  tabs.forEach(function(tab, i){
+    tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    tab.addEventListener('click', function(){
+      select(tab, false);
+      window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+    tab.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if(!d) return;
+      e.preventDefault();
+      select(tabs[(i + d + tabs.length) % tabs.length], true);
+    });
+  });
+})();
+</script>
+</body>
+</html>
