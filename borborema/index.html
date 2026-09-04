@@ -47,6 +47,12 @@
     --viz-band:     oklch(0.938 0.010 165);
     --viz-grid:     oklch(0.905 0.008 165);
 
+    --hero-bg:      oklch(0.27 0.058 254);
+    --hero-bg-2:    oklch(0.32 0.062 254);
+    --hero-ink:     oklch(0.975 0.006 254);
+    --hero-ink-2:   oklch(0.80 0.028 254);
+    --hero-kicker:  oklch(0.80 0.090 224);
+
     /* escala 4pt */
     --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px; --s12:48px; --s16:64px; --s24:96px;
 
@@ -74,36 +80,45 @@
   p{margin:0;text-wrap:pretty}
   .num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 
-  /* ---------- cabeçalho ---------- */
-  header.doc{padding:var(--s12) 0 var(--s6)}
+  /* ---------- cabeçalho: faixa de largura total ---------- */
+  .hero-band{
+    background:linear-gradient(180deg, var(--hero-bg-2), var(--hero-bg) 70%);
+    color:var(--hero-ink)
+  }
+  .hero-inner{max-width:960px;margin:0 auto;padding:var(--s12) var(--s6) var(--s8)}
   .kicker{
     font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--pinho);margin-bottom:var(--s4);display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3)
+    color:var(--hero-kicker);margin-bottom:var(--s4);display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3)
   }
-  .kicker span::after{content:"·";margin-left:var(--s3);color:var(--rule)}
+  .kicker span::after{content:"·";margin-left:var(--s3);color:var(--hero-ink-2);opacity:.55}
   .kicker span:last-child::after{content:""}
-  h1{font-size:2.625rem;line-height:1.08}
-  header.doc .sub{margin-top:var(--s3);color:var(--ink-2);max-width:64ch;font-size:.9375rem;line-height:1.6}
+  h1{font-size:2.625rem;line-height:1.08;color:var(--hero-ink)}
+  header.doc .sub{margin-top:var(--s3);color:var(--hero-ink-2);max-width:64ch;font-size:.9375rem;line-height:1.6}
 
-  /* ---------- abas ---------- */
+  /* ---------- abas: botões delimitados ---------- */
   .tabs{
-    display:flex;gap:var(--s1);flex-wrap:wrap;
-    border-bottom:1px solid var(--rule);
+    display:flex;gap:var(--s2);flex-wrap:wrap;
     position:sticky;top:0;z-index:var(--z-sticky);
-    background:var(--paper);padding-top:var(--s3)
+    background:var(--paper);padding:var(--s4) 0 var(--s6);
+    border-bottom:1px solid var(--rule-soft)
   }
   .tabs button{
-    appearance:none;border:0;background:transparent;cursor:pointer;
-    font:500 .875rem/1.4 var(--sans);color:var(--ink-3);
-    padding:var(--s3) var(--s4);min-height:44px;
-    border-bottom:2px solid transparent;margin-bottom:-1px;
-    transition:color .15s var(--ease-out),border-color .15s var(--ease-out),background-color .15s var(--ease-out);
-    white-space:nowrap;border-radius:2px 2px 0 0
+    appearance:none;cursor:pointer;
+    font:500 .875rem/1.4 var(--sans);color:var(--ink-2);
+    background:var(--raised);
+    border:1px solid var(--rule);border-radius:4px;
+    padding:var(--s2) var(--s4);min-height:40px;
+    transition:color .15s var(--ease-out),border-color .15s var(--ease-out),
+               background-color .15s var(--ease-out),box-shadow .15s var(--ease-out);
+    white-space:nowrap
   }
-  .tabs button:hover{color:var(--ink);background:var(--sunken)}
+  .tabs button:hover{color:var(--ink);border-color:var(--pinho-2);background:var(--sunken)}
   .tabs button:active{background:var(--rule-soft)}
-  .tabs button[aria-selected="true"]{color:var(--pinho);border-bottom-color:var(--pinho)}
-  .tabs button:focus-visible{outline:2px solid var(--pinho);outline-offset:-3px}
+  .tabs button[aria-selected="true"]{
+    color:var(--pinho);background:var(--pinho-tint);border-color:var(--pinho-2);
+    box-shadow:inset 0 0 0 1px var(--pinho-2)
+  }
+  .tabs button:focus-visible{outline:2px solid var(--pinho);outline-offset:2px}
   .tabs .badge{font-family:var(--mono);font-size:.6875rem;color:var(--ink-3);margin-left:var(--s2);font-weight:400}
   .tabs button[aria-selected="true"] .badge{color:var(--pinho-2)}
 
@@ -283,22 +298,25 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="hero-band">
+  <header class="doc hero-inner">
+    <div class="kicker"><span>Condomínio Edifício Borborema</span><span>21 unidades</span><span>Curitiba, PR</span></div>
+    <h1>Auditoria das contas<br>de janeiro a julho de 2026</h1>
+    <p class="sub">Leitura integral dos sete livros de prestação de contas da F&amp;N Administradora — 1.419
+    páginas — com reconstrução das rubricas e conciliação lançamento a lançamento contra os extratos Sicredi.
+    As séries de água e energia recuam a janeiro de 2025, com o consumo físico em metros cúbicos e em
+    quilowatts-hora lido das próprias faturas da Sanepar e da Copel anexadas aos comprovantes.</p>
+  </header>
+</div>
 
-<header class="doc">
-  <div class="kicker"><span>Condomínio Edifício Borborema</span><span>21 unidades</span><span>Curitiba, PR</span></div>
-  <h1>Auditoria das contas<br>de janeiro a julho de 2026</h1>
-  <p class="sub">Leitura integral dos sete livros de prestação de contas da F&amp;N Administradora — 1.419
-  páginas — com reconstrução das rubricas e conciliação lançamento a lançamento contra os extratos Sicredi.
-  As séries de água e energia recuam a janeiro de 2025, com o consumo físico em metros cúbicos e em
-  quilowatts-hora lido das próprias faturas da Sanepar e da Copel anexadas aos comprovantes.</p>
-</header>
+<div class="wrap">
 
 <div class="tabs" role="tablist" aria-label="Seções da auditoria">
   <button role="tab" id="t-panorama" aria-controls="p-panorama" aria-selected="true">Panorama</button>
   <button role="tab" id="t-taxa" aria-controls="p-taxa" aria-selected="false">Taxa condominial</button>
   <button role="tab" id="t-agua" aria-controls="p-agua" aria-selected="false">Água</button>
   <button role="tab" id="t-energia" aria-controls="p-energia" aria-selected="false">Energia</button>
+  <button role="tab" id="t-sem-antena" aria-controls="p-sem-antena" aria-selected="false">Sem antena</button>
   <button role="tab" id="t-achados" aria-controls="p-achados" aria-selected="false">Achados<span class="badge">9</span></button>
   <button role="tab" id="t-economia" aria-controls="p-economia" aria-selected="false">Economia</button>
 </div>
@@ -456,6 +474,94 @@
   </div>
 </div>
 
+<!-- ============ SEM ANTENA ============ -->
+<div role="tabpanel" id="p-sem-antena" aria-labelledby="t-sem-antena" hidden>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Cenário de estresse · a receita que não vem de arrecadação</span><h2>Se o contrato da antena acabar</h2></div>
+    <p class="lede">A aba Taxa condominial já registrou o risco: R$ 4.362,37 por mês, R$ 52.348 por ano,
+    28,7% do valor da taxa condominial, vêm de um único contrato comercial — não de rateio entre
+    condôminos. Esta aba isola esse cenário e calcula o que muda no boleto se essa receita desaparecer, sem
+    alterar mais nada na estrutura de custeio.</p>
+
+    <div class="rail">
+      <div><span class="rail-k">Receita da antena</span><span class="rail-v alto">4.362<span class="rail-u">/mês</span></span><span class="rail-n">207,73 por unidade</span></div>
+      <div><span class="rail-k">Perda anual</span><span class="rail-v alto">52.348</span><span class="rail-n">se o contrato encerrar</span></div>
+      <div><span class="rail-k">Peso na taxa hoje</span><span class="rail-v alto">28,7%</span><span class="rail-n">207,73 / 723,11</span></div>
+      <div><span class="rail-k">Aumento necessário</span><span class="rail-v alto">+228,50</span><span class="rail-n">por unidade, por mês</span></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Reposição direta · tudo o mais igual</span><h2>Método 1 — substituir só o que falta</h2></div>
+    <p class="lede">A forma mais simples de calcular: manter FR, FP, fundo de obras e água exatamente como
+    estão hoje (regime pós-telhado, com o fundo de obras já normalizado para R$ 100 mensais de reposição) e
+    somar a perda da antena inteira à taxa condominial, já que é dali que a folga do orçamento sai.</p>
+    <div class="scroller">
+    <table>
+      <caption>Boleto mensal por unidade · regime estável, sem a taxa extraordinária do telhado</caption>
+      <thead><tr><th>Componente</th><th>Hoje, com antena</th><th>Sem antena</th><th>Δ</th></tr></thead>
+      <tbody>
+        <tr><td>Taxa condominial</td><td class="num">723,11</td><td class="num">930,84</td><td class="num neg">+207,73</td></tr>
+        <tr><td>Fundo de reserva <span class="quiet">(10% da taxa)</span></td><td class="num">72,31</td><td class="num">93,08</td><td class="num neg">+20,77</td></tr>
+        <tr><td>Fundo de pessoal</td><td class="num">38,10</td><td class="num">38,10</td><td class="num quiet">—</td></tr>
+        <tr><td>Fundo de obras <span class="quiet">(reposição, pós-telhado)</span></td><td class="num">100,00</td><td class="num">100,00</td><td class="num quiet">—</td></tr>
+        <tr><td>Água <span class="quiet">(rateio normalizado)</span></td><td class="num">183,15</td><td class="num">183,15</td><td class="num quiet">—</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td>Total mensal por unidade</td><td class="num">1.116,67</td><td class="num">1.345,17</td><td class="num neg">+228,50</td></tr>
+        <tr><td class="quiet" style="font-weight:400">variação</td><td class="num quiet" style="font-weight:400">—</td><td class="num" style="font-weight:400">+20,5%</td><td class="num quiet" style="font-weight:400"></td></tr>
+      </tfoot>
+    </table>
+    </div>
+    <figcaption style="margin-top:var(--s3)">O fundo de reserva sobe junto porque está fixado em 10% da taxa
+    condominial pela convenção — não é uma escolha deste cálculo, é regra já em vigor.</figcaption>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Sobre o plano recomendado da aba Taxa condominial</span><h2>Método 2 — combinado com a revisão de valor mínimo</h2></div>
+    <p class="lede">O segundo ângulo aplica a mesma perda ao patamar <b>recomendado</b> que já foi proposto
+    para depois do telhado — aquele que pressupõe água e energia normalizadas. O resultado confirma o
+    Método 1: a diferença é a mesma, porque a perda da antena é aditiva e não depende de qual base de
+    custeio se usa.</p>
+    <div class="scroller">
+    <table>
+      <caption>Boleto recomendado, com e sem a receita da antena</caption>
+      <thead><tr><th>Cenário</th><th>Taxa condominial</th><th>Total mensal</th><th>Δ vs. recomendado</th></tr></thead>
+      <tbody>
+        <tr><td>Recomendado, com antena <span class="quiet">(aba Taxa condominial)</span></td><td class="num">487,39</td><td class="num">836,33</td><td class="num quiet">base</td></tr>
+        <tr><td>Recomendado, sem antena</td><td class="num">695,12</td><td class="num">1.064,83</td><td class="num neg">+228,50 · +27,3%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="lede" style="margin-top:var(--s6)">Convergência dos dois métodos em R$ 228,50 por unidade é o
+    teste de consistência: qualquer que seja a base — o boleto de hoje ou a proposta de revisão — perder a
+    antena custa o mesmo, porque é uma perda de receita fixa, não uma mudança na estrutura de custos.</p>
+  </div>
+
+  <div class="block">
+    <div class="block-head"><span class="index">Leitura do risco</span><h2>O que isso significa na prática</h2></div>
+    <div class="callout">
+      <h3>Não é um cenário remoto</h3>
+      <p>A receita já está congelada em R$ 4.362,37 desde outubro de 2025 — treze meses sem reajuste — o
+      que por si só é um sinal de atenção contratual (aba Economia). Um contrato de locação de antena de
+      telecomunicações tem prazo determinado e reajuste não é automático fora da vigência: o risco de
+      redução ou fim da receita é concreto, não hipotético.</p>
+    </div>
+    <ul class="steps">
+      <li><b>Nenhuma decisão precisa ser tomada agora.</b> O propósito deste cenário é dimensionar a
+      exposição, não recomendar aumento — a taxa não deve mudar antes que o contrato dê sinal de risco
+      real.</li>
+      <li><b>Incluir a cláusula de reajuste e a vigência do contrato entre os documentos a solicitar</b>
+      (aba Achados). É o único dado que falta para saber se o risco é de anos ou de meses.</li>
+      <li><b>Se a revisão de valor mínimo avançar (aba Taxa condominial), considerar embutir uma margem de
+      segurança</b> equivalente a uma fração da receita da antena — não os R$ 228,50 inteiros, mas o
+      suficiente para que uma queda parcial do contrato não force uma assembleia extraordinária de
+      emergência.</li>
+    </ul>
+  </div>
+</div>
+
 <!-- ============ ÁGUA ============ -->
 <div role="tabpanel" id="p-agua" aria-labelledby="t-agua" hidden>
 
@@ -535,6 +641,17 @@
     meses — e só então subiu para R$ 1.211,98 em jun/2026; a faixa de 6 a 10 m³ passou de R$ 1,66 para
     R$ 1,70 por metro cúbico. Entre dezembro e maio, portanto, com tarifa congelada, a conta subiu 48% e o
     consumo subiu 32%.</p>
+
+    <div class="callout">
+      <h3>Nenhum serviço de hidráulica explica o degrau</h3>
+      <p>Conferi a categoria inteira de Manutenção e Conservação em fevereiro, março e abril de 2026, a
+      janela em que o consumo começou a subir: nenhum lançamento de hidráulica, desentupimento ou limpeza
+      de caixa d'água. Os dois eventos mais próximos apontam para depois, não para antes — em abril o
+      condomínio comprou uma lavadora de alta pressão desentupidora (R$ 1.411,90, rubrica 2.1.9.86), e a
+      dedetização da caixa d'água só ocorreu em maio e junho, já com o consumo em alta. A ausência de um
+      reparo formal registrado reforça a hipótese de vazamento não identificado, em vez de descartá-la: se
+      alguém tivesse resolvido algo, apareceria como despesa.</p>
+    </div>
 
     <div class="callout">
       <h3>É consumo, e a tarifa progressiva amplifica</h3>
